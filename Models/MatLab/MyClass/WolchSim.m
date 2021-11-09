@@ -48,7 +48,7 @@ classdef WolchSim < matlab.System & handle
             % Perform one-time calculations, such as computing constants
         end
 
-        function y = stepImpl(obj, u)
+        function y = stepImpl(obj, u, norm)
             % Implement algorithm. Calculate y as a function of input u and
             % discrete states.
             obj.mD(1:obj.nfft-1) = obj.mD(2:obj.nfft);
@@ -56,10 +56,12 @@ classdef WolchSim < matlab.System & handle
             y0 = abs(fwht(obj.mD));
             count_mask = length(obj.mask);
             y1 = y0(1: count_mask)';
-            y = obj.mask*y1;
-%             obj.ind = obj.ind+1;
-%             kk=obj.ind
-%             ff=y
+            y = double(obj.mask*y1);
+            y=y/norm;
+            y=min(y,1);
+%            obj.ind = obj.ind+1;
+%            kk=obj.ind
+%            ff=y
              
 % xxx1 = xxx0(n: n+64)
 % y = abs(fwht(xxx1))
