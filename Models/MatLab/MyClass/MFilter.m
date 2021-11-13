@@ -5,7 +5,7 @@ classdef MFilter  < handle
     
     methods
         function obj = MFilter()
-            obj.SetSVCH_Cheb(struct('Fstop',  0.4, 'Fpass',  0.8, 'Astop', 40, 'Apass', 0.9));
+            obj.SetSVCH_Cheb(struct('Fstop',  0.4, 'Fpass',  0.8, 'Astop', 40, 'Apass', 0.9))
             
         end
         
