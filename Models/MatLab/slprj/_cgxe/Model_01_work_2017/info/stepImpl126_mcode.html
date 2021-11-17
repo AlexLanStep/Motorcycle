@@ -1,0 +1,123 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<body>
+<script src="resources/eml_report_loadable_data.js"></script>
+<div class="dead">
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="17,1" id="srcline1">  1</a></span><span class="line"><span class="keyword">classdef</span> ModulSigmoid &lt; handle &amp; matlab.System</span></span>
+<span class="srcline"><span class="lineno"><a href="17,2" id="srcline2">  2</a></span><span class="line">    <span class="comment">% Untitled2 Add summary here</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,3" id="srcline3">  3</a></span><span class="line">    <span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,4" id="srcline4">  4</a></span><span class="line">    <span class="comment">% This template includes the minimum set of functions required</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,5" id="srcline5">  5</a></span><span class="line">    <span class="comment">% to define a System object with discrete state.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,6" id="srcline6">  6</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="17,7" id="srcline7">  7</a></span><span class="line">    <span class="comment">% Public, tunable properties</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,8" id="srcline8">  8</a></span><span class="line">    </span></span>
+<span class="srcline"><span class="lineno"><a href="17,9" id="srcline9">  9</a></span><span class="line">    <span class="keyword">properties</span>(SetAccess  = public)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,10" id="srcline10"> 10</a></span><span class="line">        Rwheel = 17*0.0254</span></span>
+<span class="srcline"><span class="lineno"><a href="17,11" id="srcline11"> 11</a></span><span class="line">        Transfer = 3</span></span>
+<span class="srcline"><span class="lineno"><a href="17,12" id="srcline12"> 12</a></span><span class="line">        Kreset  = 0.6;      </span></span>
+<span class="srcline"><span class="lineno"><a href="17,13" id="srcline13"> 13</a></span><span class="line">        sd = 6 </span></span>
+<span class="srcline"><span class="lineno"><a href="17,14" id="srcline14"> 14</a></span><span class="line">        sdsn = 0.25</span></span>
+<span class="srcline"><span class="lineno"><a href="17,15" id="srcline15"> 15</a></span><span class="line">        betta = 0.6</span></span>
+<span class="srcline"><span class="lineno"><a href="17,16" id="srcline16"> 16</a></span><span class="line">        sm_bet = 0.3</span></span>
+<span class="srcline"><span class="lineno"><a href="17,17" id="srcline17"> 17</a></span><span class="line">        alfa = 1.0 </span></span>
+<span class="srcline"><span class="lineno"><a href="17,18" id="srcline18"> 18</a></span><span class="line">        sm_alfa = 0.3</span></span>
+<span class="srcline"><span class="lineno"><a href="17,19" id="srcline19"> 19</a></span><span class="line">        </span></span>
+<span class="srcline"><span class="lineno"><a href="17,20" id="srcline20"> 20</a></span><span class="line">    <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,21" id="srcline21"> 21</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="17,22" id="srcline22"> 22</a></span><span class="line">    <span class="keyword">properties</span>(DiscreteState)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,23" id="srcline23"> 23</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="17,24" id="srcline24"> 24</a></span><span class="line">    <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,25" id="srcline25"> 25</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="17,26" id="srcline26"> 26</a></span><span class="line">    <span class="comment">% Pre-computed constants</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,27" id="srcline27"> 27</a></span><span class="line">    <span class="keyword">properties</span>(Access = private)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,28" id="srcline28"> 28</a></span><span class="line">        d = zeros(6, 101);</span></span>
+<span class="srcline"><span class="lineno"><a href="17,29" id="srcline29"> 29</a></span><span class="line">        ind = 0;</span></span>
+<span class="srcline"><span class="lineno"><a href="17,30" id="srcline30"> 30</a></span><span class="line">        dSlipp = [0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0];</span></span>
+<span class="srcline"><span class="lineno"><a href="17,31" id="srcline31"> 31</a></span><span class="line">        lSlipp = 0;</span></span>
+<span class="srcline"><span class="lineno"><a href="17,32" id="srcline32"> 32</a></span><span class="line">    <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,33" id="srcline33"> 33</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="17,34" id="srcline34"> 34</a></span><span class="line">        <span class="keyword">methods</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,35" id="srcline35"> 35</a></span><span class="line">        <span class="comment">% Constructor</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,36" id="srcline36"> 36</a></span><span class="line">        <span class="keyword">function</span> obj = ModulSigmoid(varargin)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,37" id="srcline37"> 37</a></span><span class="line">            <span class="comment">% Support name-value pair arguments when constructing object</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,38" id="srcline38"> 38</a></span><span class="line">            setProperties(obj,nargin,varargin{:})</span></span>
+<span class="srcline"><span class="lineno"><a href="17,39" id="srcline39"> 39</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="17,40" id="srcline40"> 40</a></span><span class="line">            <span class="keyword">for</span> i=1:6</span></span>
+<span class="srcline"><span class="lineno"><a href="17,41" id="srcline41"> 41</a></span><span class="line">                <span class="keyword">for</span> j=1:101</span></span>
+<span class="srcline"><span class="lineno"><a href="17,42" id="srcline42"> 42</a></span><span class="line">                    obj.d(i, j)= CalcSigm(obj, i-1,   j-1);       </span></span>
+<span class="srcline"><span class="lineno"><a href="17,43" id="srcline43"> 43</a></span><span class="line">                <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,44" id="srcline44"> 44</a></span><span class="line">            <span class="keyword">end</span>            </span></span>
+<span class="srcline"><span class="lineno"><a href="17,45" id="srcline45"> 45</a></span><span class="line">            </span></span>
+<span class="srcline"><span class="lineno"><a href="17,46" id="srcline46"> 46</a></span><span class="line">            [i0, j0]  = size(obj.d)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,47" id="srcline47"> 47</a></span><span class="line">            <span class="keyword">for</span> k=i0-1:-1:1</span></span>
+<span class="srcline"><span class="lineno"><a href="17,48" id="srcline48"> 48</a></span><span class="line">                disp(k)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,49" id="srcline49"> 49</a></span><span class="line">                count = length(obj.d(k, obj.d(k,:)  &gt;  obj.d(k+1, :)))</span></span>
+<span class="srcline"><span class="lineno"><a href="17,50" id="srcline50"> 50</a></span><span class="line">                obj.d(k,1:count) = obj.d(k+1,1:count);</span></span>
+<span class="srcline"><span class="lineno"><a href="17,51" id="srcline51"> 51</a></span><span class="line">            <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,52" id="srcline52"> 52</a></span><span class="line">            </span></span>
+<span class="srcline"><span class="lineno"><a href="17,53" id="srcline53"> 53</a></span><span class="line">            obj.lSlipp = length(obj.dSlipp);</span></span>
+<span class="srcline"><span class="lineno"><a href="17,54" id="srcline54"> 54</a></span><span class="line">        <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,55" id="srcline55"> 55</a></span><span class="line">    <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,56" id="srcline56"> 56</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="17,57" id="srcline57"> 57</a></span><span class="line">    <span class="keyword">methods</span>(Access = protected)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,58" id="srcline58"> 58</a></span><span class="line">        <span class="keyword">function</span> setupImpl(obj)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,59" id="srcline59"> 59</a></span><span class="line">            <span class="comment">% Perform one-time calculations, such as computing constants</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,60" id="srcline60"> 60</a></span><span class="line">        <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,61" id="srcline61"> 61</a></span><span class="line">        </span></span>
+<span class="srcline"><span class="lineno"><a href="17,62" id="srcline62"> 62</a></span><span class="line">        <span class="keyword">function</span> y = CalcSigm(obj, k, j)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,63" id="srcline63"> 63</a></span><span class="line">            y  =  1. / (1 + ((obj.alfa+k* obj.sm_alfa) * exp(-(obj.betta +k*obj.sm_bet) * (j /10  - (obj.sd-k*obj.sdsn)))));</span></span>
+<span class="srcline"><span class="lineno"><a href="17,64" id="srcline64"> 64</a></span><span class="line">        <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,65" id="srcline65"> 65</a></span><span class="line">        </span></span>
+<span class="srcline"><span class="lineno"><a href="17,66" id="srcline66"> 66</a></span><span class="line">        <span class="keyword">function</span> obj  = Slippage(obj, vBelt,  rotv)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,67" id="srcline67"> 67</a></span><span class="line">            R =  obj.Rwheel  *  obj.Transfer;</span></span>
+<span class="srcline"><span class="lineno"><a href="17,68" id="srcline68"> 68</a></span><span class="line">            </span></span>
+<span class="srcline"><span class="lineno"><a href="17,69" id="srcline69"> 69</a></span><span class="line">            <span class="keyword">if</span> rotv &lt;= 10</span></span>
+<span class="srcline"><span class="lineno"><a href="17,70" id="srcline70"> 70</a></span><span class="line">                x = 0;</span></span>
+<span class="srcline"><span class="lineno"><a href="17,71" id="srcline71"> 71</a></span><span class="line">            <span class="keyword">else</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,72" id="srcline72"> 72</a></span><span class="line">                x = 1 - (vBelt)/(rotv'*R );            </span></span>
+<span class="srcline"><span class="lineno"><a href="17,73" id="srcline73"> 73</a></span><span class="line">            <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,74" id="srcline74"> 74</a></span><span class="line">            </span></span>
+<span class="srcline"><span class="lineno"><a href="17,75" id="srcline75"> 75</a></span><span class="line">            obj.dSlipp( 2:obj.lSlipp) = obj.dSlipp(1:obj.lSlipp-1);</span></span>
+<span class="srcline"><span class="lineno"><a href="17,76" id="srcline76"> 76</a></span><span class="line">            obj.dSlipp(1) = x;</span></span>
+<span class="srcline"><span class="lineno"><a href="17,77" id="srcline77"> 77</a></span><span class="line">            </span></span>
+<span class="srcline"><span class="lineno"><a href="17,78" id="srcline78"> 78</a></span><span class="line"><span class="comment">%             if obj.dSlipp(obj.lSlipp) ~= 0</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,79" id="srcline79"> 79</a></span><span class="line"><span class="comment">%                 obj.ind=0;</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,80" id="srcline80"> 80</a></span><span class="line"><span class="comment">%             else</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,81" id="srcline81"> 81</a></span><span class="line"><span class="comment">%                  sr = sum(obj.dSlipp)/obj.lSlipp;</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,82" id="srcline82"> 82</a></span><span class="line"><span class="comment">%                  sd = std(obj.dSlipp);</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,83" id="srcline83"> 83</a></span><span class="line"><span class="comment">%                  if obj.dSlipp(1)&gt;(sr + sd)</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,84" id="srcline84"> 84</a></span><span class="line"><span class="comment">%                      obj.ind = min(obj.ind+1,  6);</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,85" id="srcline85"> 85</a></span><span class="line"><span class="comment">%                  elseif obj.dSlipp(1)&lt;(sr - sd)</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,86" id="srcline86"> 86</a></span><span class="line"><span class="comment">%                      obj.ind = max(obj.ind-1, 0);</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,87" id="srcline87"> 87</a></span><span class="line"><span class="comment">%                  else</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,88" id="srcline88"> 88</a></span><span class="line"><span class="comment">%                      obj.ind = obj.ind;</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,89" id="srcline89"> 89</a></span><span class="line"><span class="comment">%             end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,90" id="srcline90"> 90</a></span><span class="line"><span class="comment">%             if x &lt; obj.Kreset  % если значения x меньше </span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,91" id="srcline91"> 91</a></span><span class="line"><span class="comment">%                 obj.ind = 0;</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,92" id="srcline92"> 92</a></span><span class="line"><span class="comment">%             end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,93" id="srcline93"> 93</a></span><span class="line"><span class="comment">%             end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,94" id="srcline94"> 94</a></span><span class="line">        <span class="keyword">end</span></span></span>
+</pre>
+</div>
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="17,95" id="srcline95"> 95</a></span><span class="line">        </span></span>
+<span class="srcline"><span class="lineno"><a href="17,96" id="srcline96"> 96</a></span><span class="line">        <span class="keyword">function</span> <span class="var type1" id="S48T1U342">y</span> = stepImpl(<span class="var type1" id="S49T8U345">obj</span>, <span class="var type1" id="S50T1U346">signal</span>,  <span class="var type1" id="S51T1U347">vBelt</span>,  <span class="var type1" id="S52T1U348">rotv</span>)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,97" id="srcline97"> 97</a></span><span class="line">            <span class="message error" id="M1F126C">Slippage(<span class="var type1" id="S49T8U352">obj</span>, <span class="var type1" id="S51T1U353">vBelt</span>,  <span class="var type1" id="S52T1U354">rotv</span>)</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,98" id="srcline98"> 98</a></span><span class="line">            <span class="mxinfo " id="T1:U9"><span class="var type1" id="S54T1U357">i</span> = <span class="mxinfo " id="T1:U11">min(<span class="mxinfo " id="T1:U12">round(<span class="var type1" id="S50T1U362">signal</span>)</span>, <span class="mxinfo " id="T1:U14">100</span>)</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="17,99" id="srcline99"> 99</a></span><span class="line">            <span class="mxinfo " id="T1:U15"><span class="var type1" id="S48T1U366">y</span> = <span class="mxinfo " id="T1:U17"><span class="mxinfo " id="T18:U18"><span class="var type1" id="S49T8U369">obj</span>.d</span>(<span class="mxinfo " id="T1:U20"><span class="var type1" id="S49T8U372">obj</span>.ind</span>, <span class="var type1" id="S54T1U374">i</span>)</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="17,100" id="srcline100">100</a></span><span class="line">        <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,101" id="srcline101">101</a></span><span class="line"></span></span>
+</pre>
+<div class="dead">
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="17,102" id="srcline102">102</a></span><span class="line">        <span class="keyword">function</span> resetImpl(obj)</span></span>
+<span class="srcline"><span class="lineno"><a href="17,103" id="srcline103">103</a></span><span class="line">            <span class="comment">% Initialize / reset discrete-state properties</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,104" id="srcline104">104</a></span><span class="line">        <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,105" id="srcline105">105</a></span><span class="line">    <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,106" id="srcline106">106</a></span><span class="line"><span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="17,107" id="srcline107">107</a></span><span class="line"> </span></span>
+</pre>
+</div>
+</body>
+</html>

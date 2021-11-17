@@ -50,12 +50,12 @@ if __name__ == '__main__':
 #    _analys128 = Analysis(_server.GetWorks(WorkingWay.Work128), _files128[_NumFiles], 128)
 #    _analys128.SignalPlotDan(["eSpYawAcc","eSpfYawAcc", "eSpfYawVel", "eSpfRollVel", "Slip"])
 
+    _analys64.TestSigmoid()  #
 
     Show()
 
     kk = 1
 
-#    _analys64.TestSigmoid()  #
 '''
 
     _works = {

@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Code Generation Report</title>
+<link rel="stylesheet" type="text/css" href="resources/eml_report.css" />
+<link rel="stylesheet" type="text/css" href="resources/jQuery/ui.resizable.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+<style>
+	pre.code{
+		-moz-tab-size: 4; /* For Firefox */
+		-o-tab-size: 4; /* For Opera 10.6-12.1 */
+		tab-size: 4; /* For Chrome */
+	}
+</style>
+<script type="text/javascript" src="resources/jQuery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="resources/jQuery/jquery-ui-1.7.custom.min.js"></script>
+<script type="text/javascript" src="resources/jQuery/jquery.tablesorter.mod.js"></script>
+<script type="text/javascript" src="resources/jQuery/jquery.hotkeys-0.7.8.js"></script>
+<script type="text/javascript" src="resources/eml_report_interactions.js"></script>
+<script type="text/javascript" src="resources/eml_report_layout.js"></script>
+<script type="text/javascript" src="rtwshrink.js"></script>
+<script type="text/javascript">
+var localizedMessages = {
+    callSelectPrompt: "Select a function call:",
+    callSelectSource: "Calls from this function",
+    callSelectTarget: "Calls to this function",
+    infoForExpression: "Information for the selected expression:",
+    infoForVarType: "Information for the selected variable:",
+    infoForVarConst: "Information for the selected compile-time constant:",
+    infoForVarNone: "This variable does not have information associated with it.",
+    infoForFilter: "Matched {0}/{1} functions, {2}/{3} methods",
+    autoExtrinsicCall: "Only supported within the MATLAB environment."
+};
+var keyBindings = {
+        selectMCodeTab: "Ctrl+m",
+    selectCallStackTab: "Ctrl+k",
+        selectCCodeTab: "Ctrl+c",
+       selectReportTab: "Ctrl+r",
+     selectCenterPanel: "Ctrl+w",
+      selectSummaryTab: "Ctrl+s",
+     selectMessagesTab: "Ctrl+a",
+    selectWatchListTab: "Ctrl+v",
+     selectBuildLogTab: "Ctrl+t",
+    clearAllHighlights: "Esc"
+};
+var functionInfoTable = {
+ MATLABcode22: "CalcSigm22_mcode.html",
+ fpath22: "E:/Motorcycle/Models/MatLab/MyClass/ModulSigmoid.m",
+ lines22: [60, 61, 65],
+ watch22: "CalcSigm22_watch.html",
+ title22: "Method: <span class='functionname'><a title='E:&nbsp;\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m' class='functionlink' href=\"matlab: open('E:\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m')\">ModulSigmoid/CalcSigm</a></span>",
+ tcall22: [ [ "From ModulSigmoid/ModulSigmoid line 42", "30#F22N2:B122" ] ],
+ scall22: [  ],
+ MATLABcode30: "ModulSigmoid30_mcode.html",
+ fpath30: "E:/Motorcycle/Models/MatLab/MyClass/ModulSigmoid.m",
+ lines30: [35, 35, 56],
+ watch30: "ModulSigmoid30_watch.html",
+ title30: "Method: <span class='functionname'><a title='E:&nbsp;\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m' class='functionlink' href=\"matlab: open('E:\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m')\">ModulSigmoid/ModulSigmoid</a></span>",
+ tcall30: [  ],
+ scall30: [ [ "From line 42 to ModulSigmoid/CalcSigm", "22#srcline61" ],  ],
+ MATLABcode46: "isInputSizeLockedImpl46_mcode.html",
+ fpath46: "E:/Motorcycle/Models/MatLab/MyClass/ModulSigmoid.m",
+ lines46: [147, 148, 154],
+ watch46: "isInputSizeLockedImpl46_watch.html",
+ title46: "Method: <span class='functionname'><a title='E:&nbsp;\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m' class='functionlink' href=\"matlab: open('E:\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m')\">ModulSigmoid/isInputSizeLockedImpl</a></span>",
+ tcall46: [  ],
+ scall46: [  ],
+ MATLABcode54: "validatePropertiesImpl54_mcode.html",
+ fpath54: "E:/Motorcycle/Models/MatLab/MyClass/ModulSigmoid.m",
+ lines54: [133, 134, 138],
+ watch54: "validatePropertiesImpl54_watch.html",
+ title54: "Method: <span class='functionname'><a title='E:&nbsp;\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m' class='functionlink' href=\"matlab: open('E:\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m')\">ModulSigmoid/validatePropertiesImpl</a></span>",
+ tcall54: [  ],
+ scall54: [  ],
+ MATLABcode62: "validateInputsImpl62_mcode.html",
+ fpath62: "E:/Motorcycle/Models/MatLab/MyClass/ModulSigmoid.m",
+ lines62: [130, 130, 134],
+ watch62: "validateInputsImpl62_watch.html",
+ title62: "Method: <span class='functionname'><a title='E:&nbsp;\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m' class='functionlink' href=\"matlab: open('E:\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m')\">ModulSigmoid/validateInputsImpl</a></span>",
+ tcall62: [  ],
+ scall62: [  ],
+ MATLABcode97: "setupImpl97_mcode.html",
+ fpath97: "E:/Motorcycle/Models/MatLab/MyClass/ModulSigmoid.m",
+ lines97: [94, 95, 99],
+ watch97: "setupImpl97_watch.html",
+ title97: "Method: <span class='functionname'><a title='E:&nbsp;\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m' class='functionlink' href=\"matlab: open('E:\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m')\">ModulSigmoid/setupImpl</a></span>",
+ tcall97: [  ],
+ scall97: [  ],
+ MATLABcode111: "resetImpl111_mcode.html",
+ fpath111: "E:/Motorcycle/Models/MatLab/MyClass/ModulSigmoid.m",
+ lines111: [103, 104, 108],
+ watch111: "resetImpl111_watch.html",
+ title111: "Method: <span class='functionname'><a title='E:&nbsp;\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m' class='functionlink' href=\"matlab: open('E:\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m')\">ModulSigmoid/resetImpl</a></span>",
+ tcall111: [  ],
+ scall111: [  ],
+ MATLABcode115: "processTunedPropertiesImpl115_mcode.html",
+ fpath115: "E:/Motorcycle/Models/MatLab/MyClass/ModulSigmoid.m",
+ lines115: [142, 143, 148],
+ watch115: "processTunedPropertiesImpl115_watch.html",
+ title115: "Method: <span class='functionname'><a title='E:&nbsp;\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m' class='functionlink' href=\"matlab: open('E:\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m')\">ModulSigmoid/processTunedPropertiesImpl</a></span>",
+ tcall115: [  ],
+ scall115: [  ],
+ MATLABcode176: "stepImpl176_mcode.html",
+ fpath176: "E:/Motorcycle/Models/MatLab/MyClass/ModulSigmoid.m",
+ lines176: [98, 99, 104],
+ watch176: "stepImpl176_watch.html",
+ title176: "Method: <span class='functionname'><a title='E:&nbsp;\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m' class='functionlink' href=\"matlab: open('E:\\Motorcycle\\Models\\MatLab\\MyClass\\ModulSigmoid.m')\">ModulSigmoid/stepImpl</a></span>",
+ tcall176: [  ],
+ scall176: [  ],
+ rootFcnID: "176",
+ firstPage: "176",
+ htmlRoot: "E:/Motorcycle/Models/MatLab/slprj/_cgxe/Model_01_work_2017/info/"
+};
+var scriptInfoTable = {
+ fpath1: "",
+ fpath2: "C:/MATLAB/R2017a/toolbox/shared/system/coder/+matlab/+system/+coder/SystemProp.p",
+ fpath3: "C:/MATLAB/R2017a/toolbox/coder/coder/+coder/+internal/matlabCodegenHandle.p",
+ fpath4: "C:/MATLAB/R2017a/toolbox/shared/system/coder/+matlab/+system/+coder/SystemCore.p",
+ fpath5: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/isBuiltInNumeric.m",
+ fpath6: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/elmat/isnan.m",
+ fpath7: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/error.m",
+ fpath8: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/toLogicalCheck.m",
+ fpath9: "C:/MATLAB/R2017a/toolbox/shared/system/coder/+matlab/+system/+coder/System.p",
+ fpath10: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/scalexpCompatible.m",
+ fpath11: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/div.m",
+ fpath12: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/ops/rdivide.m",
+ fpath13: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/ops/mrdivide.p",
+ fpath14: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/+scalar/exp.m",
+ fpath15: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/applyScalarFunctionInPlace.m",
+ fpath16: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/elfun/exp.m",
+ fpath17: "E:/Motorcycle/Models/MatLab/MyClass/ModulSigmoid.m",
+ fpath18: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/length.m",
+ fpath19: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/+scalar/floor.m",
+ fpath20: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/elfun/floor.m",
+ fpath21: "C:/MATLAB/R2017a/toolbox/shared/coder/coder/+coder/+internal/narginchk.m",
+ fpath22: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/scalarEg.m",
+ fpath23: "C:/MATLAB/R2017a/toolbox/eml/lib/fixedpoint/isnumerictype.m",
+ fpath24: "C:/MATLAB/R2017a/toolbox/eml/lib/fixedpoint/isfimath.m",
+ fpath25: "C:/MATLAB/R2017a/toolbox/eml/lib/fixedpoint/isfi.m",
+ fpath26: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/elmat/intmax.m",
+ fpath27: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/elmat/intmin.m",
+ fpath28: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/eml/eml_int_forloop_overflow_check.m",
+ fpath29: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/scalexpAllocNoCheck.m",
+ fpath30: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/scalexpAlloc.m",
+ fpath31: "C:/MATLAB/R2017a/toolbox/eml/eml/+coder/+internal/minOrMax.m",
+ fpath32: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/datafun/min.m",
+ fpath33: "",
+ fpath34: "",
+ fpath35: "",
+ fpath36: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/elmat/private/eml_isequal_core.m",
+ fpath37: "C:/MATLAB/R2017a/toolbox/eml/lib/matlab/elmat/isequal.m",
+ fpath38: ""
+};
+</script>
+</head>
+<body>
+
+<div class="west">
+<ul class="ui-tabs-nav">
+<li class="ui-tabs-nav-item ui-tabs-selected"><span class="tab-link" id="MATLABcode"><span>MATLAB code</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="callstack"><span>Call stack</span></span></li>
+</ul>
+<div id="MATLABcodebody" class="ui-tabs-panel">
+<!-- Begin Filter -->
+<div class="grayline methodset" onclick="filterClick(event);">
+<a class="collapsed">Filter</a>
+</div>
+<div id="filterbody" class="hidden">
+<table class="myfunc-filter-tbl">
+<tr>
+<td title="Use this filter to display only functions and methods that contain variables or expressions with the specified attributes." colspan="2" class="checkbox">
+<div class="myfunc-filterby-chk"><input type="checkbox" class="filterenable" />
+<div class="filter-enable-lbl">Filter functions and methods</div></div></td></tr><tr>
+<td class="label"><div class="myfunc-filterby-lbl">Filter by:</div></td>
+<td class="select">
+<div class="filters">
+<select class="myfunc-filterby">
+<option id="size">Size</option>
+<option id="complex">Complexity</option>
+<option id="class">Class</option>
+</select>
+</div>
+</td>
+</tr>
+
+<tr>
+<td class="label"><div class="myfunc-filterstr-lbl">Filter:</div></td>
+<td class="input"><div>
+
+<div class="size">
+<select class="myfunc-filter size">
+<option value="30">1 x 0</option>
+<option value="22 30 46 54 62 97 111 115 176">1 x 1</option>
+<option value="22 30 54 62 97 111 115 176">1 x 10</option>
+<option value="22 30 46 54 62 97 111 115 176">1 x 2</option>
+<option value="22 30 46 54 62 97 111 115 176">1 x 3</option>
+<option value="22 30 46 54 62 97 111 115 176">1 x 6</option>
+<option value="22 30 54 62 97 111 115 176">6 x 101</option>
+</select>
+</div>
+
+<div class="complex">
+<select class="myfunc-filter complex">
+<option value="">Complex values</option>
+<option value="22 30 46 54 62 97 111 115 176">Real values</option>
+</select>
+</div>
+<!-- Begin Class Filter -->
+<div class="class">
+<select class="myfunc-filter class">
+<option value="22 30 46 54 62 97 111 115 176">ModulSigmoid</option>
+<option value="22 30 46 54 62 97 111 115 176">cell</option>
+<option value="22 30 46 54 62 97 111 115 176">char</option>
+<option value="22 30 46 54 62 97 111 115 176">double</option>
+<option value="22 30 46 54 62 97 111 115 176">embedded.numerictype</option>
+<option value="22 30 54 62 97 111 115 176">int32</option>
+<option value="22 30 46 54 62 97 111 115 176">logical</option>
+</select>
+</div>
+<!-- End Class Filter -->
+
+
+<div class="wl">
+<table cellspacing="0" cellpadding="0">
+<tr>
+<td class="mode">
+<select class="wl-operator" name=":22 30 46 54 62 97 111 115 176;16:22 30 46 54 62 97 111 115 176">
+<option value="eq">=</option>
+<option value="ne">~=</option>
+<option value="lt">&lt;</option>
+<option value="le">&lt;=</option>
+<option value="ge">&gt;=</option>
+<option value="gt">&gt;</option>
+</select>
+</td>
+<td class="value"><select class="wl">
+<option value="22 30 46 54 62 97 111 115 176">16</option>
+</select>
+<input class="wl" />
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<div class="myfunc-count"></div>
+</div>
+<!-- End Filter -->
+<div class="grayline methodset" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="functionSetClick(event);">
+<a class="expanded">Functions</a>
+</div>
+<!-- Begin Function Tree -->
+<div id="functiontreebody">
+<div class="functionwrapper" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="functionTreeClick(event);">
+<ol class="tree">
+<!-- Begin Function Tree Roots -->
+<!-- End Function Tree Roots -->
+</ol>
+<!-- Function Tree Nodes -->
+<div class="functiontreenodes hidden">
+</div>
+<!-- End Function Tree Nodes -->
+</div>
+</div>
+<!-- End Function Tree -->
+<!-- Begin Class Tree -->
+<div class="grayline methodset" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="methodSetClick(event);">
+<a class="expanded">Classes</a>
+</div>
+<div id="classlistbody">
+<div class="classwrapper" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="classTreeClick(event);">
+<ol class="tree">
+<!-- Begin Class Tree Roots -->
+<li class="node collapsed failed"><a class="classroot" id="F22N2:M10" title="ModulSigmoid">ModulSigmoid</a></li>
+<!-- End Class Tree Roots -->
+</ol>
+<!-- Class Tree Nodes -->
+<div class="classlistnodes hidden">
+<ol class="callstacknode" id="callstacknode22">
+<li class="node collapsed"><a>ModulSigmoid</a>
+<ul>
+<li class="leaf passed"><a href="#" class="fcn  " id="F22N2:m1" title="ModulSigmoid/CalcSigm">CalcSigm</a></li>
+<li class="leaf passed"><a href="#" class="fcn  " id="F30N3:m2" title="ModulSigmoid/ModulSigmoid">ModulSigmoid</a></li>
+<li class="leaf passed"><a href="#" class="fcn  " id="F46N4:m3" title="ModulSigmoid/isInputSizeLockedImpl">isInputSizeLockedImpl</a></li>
+<li class="leaf passed"><a href="#" class="fcn  " id="F115N5:m4" title="ModulSigmoid/processTunedPropertiesImpl">processTunedPropertiesImpl</a></li>
+<li class="leaf passed"><a href="#" class="fcn  " id="F111N6:m5" title="ModulSigmoid/resetImpl">resetImpl</a></li>
+<li class="leaf passed"><a href="#" class="fcn  " id="F97N7:m6" title="ModulSigmoid/setupImpl">setupImpl</a></li>
+<li class="leaf failed"><a href="#" class="fcn  PD1 " id="F176N8:m7" title="ModulSigmoid/stepImpl">stepImpl</a></li>
+<li class="leaf passed"><a href="#" class="fcn  " id="F62N9:m8" title="ModulSigmoid/validateInputsImpl">validateInputsImpl</a></li>
+<li class="leaf passed"><a href="#" class="fcn  " id="F54N10:m9" title="ModulSigmoid/validatePropertiesImpl">validatePropertiesImpl</a></li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<!-- End Class Tree -->
+</div>
+<!-- Begin Call Tree -->
+<div id="callstackbody" class="ui-tabs-panel hidden">
+<div class="treewrapper" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="callTreeClick(event);">
+<ol class="tree">
+<!-- Call Tree Root -->
+<li class="leaf failed"><a href="#" class="fcn  PD1 " id="F176N8:L10" title="ModulSigmoid/stepImpl">ModulSigmoid/stepImpl</a>
+</li>
+</ol>
+<!-- Call Tree Nodes -->
+<div class="callstacknodes hidden">
+<ol class="callstacknode" id="callstacknode22">
+
+<li class="leaf passed"><a href="#" class="fcn  " id="F22N2:l1" title="ModulSigmoid/CalcSigm">ModulSigmoid/CalcSigm</a>
+</li>
+</ol>
+<ol class="callstacknode" id="callstacknode30">
+
+<li class="node collapsed passed"><a href="#" class="fcn  " id="F30N3:l2" title="ModulSigmoid/ModulSigmoid">ModulSigmoid/ModulSigmoid</a>
+<ul>
+<li class="leaf passed"><a href="#" class="fcn  " id="F22N2:l3" title="ModulSigmoid/CalcSigm">ModulSigmoid/CalcSigm</a></li>
+</ul>
+</li>
+</ol>
+<ol class="callstacknode" id="callstacknode46">
+
+<li class="leaf passed"><a href="#" class="fcn  " id="F46N4:l4" title="ModulSigmoid/isInputSizeLockedImpl">ModulSigmoid/isInputSizeLockedImpl</a>
+</li>
+</ol>
+<ol class="callstacknode" id="callstacknode54">
+
+<li class="leaf passed"><a href="#" class="fcn  " id="F54N10:l5" title="ModulSigmoid/validatePropertiesImpl">ModulSigmoid/validatePropertiesImpl</a>
+</li>
+</ol>
+<ol class="callstacknode" id="callstacknode62">
+
+<li class="leaf passed"><a href="#" class="fcn  " id="F62N9:l6" title="ModulSigmoid/validateInputsImpl">ModulSigmoid/validateInputsImpl</a>
+</li>
+</ol>
+<ol class="callstacknode" id="callstacknode97">
+
+<li class="leaf passed"><a href="#" class="fcn  " id="F97N7:l7" title="ModulSigmoid/setupImpl">ModulSigmoid/setupImpl</a>
+</li>
+</ol>
+<ol class="callstacknode" id="callstacknode111">
+
+<li class="leaf passed"><a href="#" class="fcn  " id="F111N6:l8" title="ModulSigmoid/resetImpl">ModulSigmoid/resetImpl</a>
+</li>
+</ol>
+<ol class="callstacknode" id="callstacknode115">
+
+<li class="leaf passed"><a href="#" class="fcn  " id="F115N5:l9" title="ModulSigmoid/processTunedPropertiesImpl">ModulSigmoid/processTunedPropertiesImpl</a>
+</li>
+</ol>
+<ol class="callstacknode" id="callstacknode176">
+
+<li class="leaf failed"><a href="#" class="fcn  PD1 " id="F176N8:l10" title="ModulSigmoid/stepImpl">ModulSigmoid/stepImpl</a>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<!-- End Call Tree -->
+</div>
+<!-- Tooltips -->
+<div class="aux hidden">
+<div class="tooltips">
+<div class="tooltip" id="TT1"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT2"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>logical</td></tr></table></div>
+<div class="tooltip" id="TT3"><table class="tooltip"><tr><th>Size</th><td>1 x 19</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT4"><table class="tooltip"><tr><th>Size</th><td>1 x 0</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT5"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>mxArray</td></tr></table></div>
+<div class="tooltip" id="TT6"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT7"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT8"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>ModulSigmoid</td></tr></table></div>
+<div class="tooltip" id="TT9"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>int32</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT10"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT11"><table class="tooltip"><tr><th>Size</th><td>1 x 2</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT12"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT13"><table class="tooltip"><tr><th>Size</th><td>1 x 6</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT14"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT15"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>embedded.numerictype</td></tr><tr><th>Signedness</th><td>Signed</td></tr><tr><th>WL</th><td>16</td></tr><tr><th>FL</th><td>15</td></tr></table></div>
+<div class="tooltip" id="TT16"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT17"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>logical</td></tr></table></div>
+<div class="tooltip" id="TT18"><table class="tooltip"><tr><th>Size</th><td>6 x 101</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT19"><table class="tooltip"><tr><th>Size</th><td>1 x 10</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT20"><table class="tooltip"><tr><th>Size</th><td>1 x 2</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT21"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT22"><table class="tooltip"><tr><th>Size</th><td>1 x <b>:</b>101</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT23"><table class="tooltip"><tr><th>Size</th><td>1 x 101</td></tr><tr><th>Class</th><td>logical</td></tr></table></div>
+<div class="tooltip" id="TT24"><table class="tooltip"><tr><th>Size</th><td>1 x 101</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT25"><table class="tooltip"><tr><th>Size</th><td>101 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT26"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>ModulSigmoid</td></tr></table></div>
+<div class="tooltip" id="TT27"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT28"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT29"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT30"><table class="tooltip"><tr><th>Size</th><td>1 x 5</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT31"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT32"><table class="tooltip"><tr><th>Size</th><td>1 x 23</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT33"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT34"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT35"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT36"><table class="tooltip"><tr><th>Size</th><td>1 x 12</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT37"><table class="tooltip"><tr><th>Size</th><td>1 x 9</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT38"><table class="tooltip"><tr><th>Size</th><td>1 x 7</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="V1"><table class="tooltip"><tr><th>Value</th><td>   1</br></td></tr></table></div>
+<div class="tooltip" id="V2"><table class="tooltip"><tr><th>Value</th><td>     0</br></td></tr></table></div>
+<div class="tooltip" id="V3"><table class="tooltip"><tr><th>Value</th><td>    [1×2 double]    [1×2 double]    [1×2 double]</br></td></tr></table></div>
+<div class="tooltip" id="V4"><table class="tooltip"><tr><th>Value</th><td>    'double'    'double'    'double'</br></td></tr></table></div>
+<div class="tooltip" id="V5"><table class="tooltip"><tr><th>Value</th><td>  Column 1</br>    [1×1 embedded.numerictype]</br>  Column 2</br>    [1×1 embedded.numerictype]</br>  Column 3</br>    [1×1 embedded.numerictype]</br></td></tr></table></div>
+<div class="tooltip" id="V6"><table class="tooltip"><tr><th>Value</th><td>   1   1   1</br></td></tr></table></div>
+<div class="tooltip" id="V7"><table class="tooltip"><tr><th>Value</th><td>   0   0   0</br></td></tr></table></div>
+<div class="tooltip" id="V8"><table class="tooltip"><tr><th>Value</th><td></br>          DataTypeMode: Fixed-point: binary point scaling</br>            Signedness: Signed</br>            WordLength: 16</br>        FractionLength: 15</br></td></tr></table></div>
+</div>
+</div>
+<!-- End Tooltips -->
+
+<div class="south">
+<ul class="ui-tabs-nav">
+<li class="ui-tabs-nav-item ui-tabs-selected"><span class="tab-link" id="summary"><span>Summary</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="messages"><span>All Messages (1)</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="watchlist"><span>Variables</span></span></li>
+<li class="ui-tabs-nav-item hidden"><span class="tab-link" id="watchload"><span>Variables</span></span></li>
+</ul>
+
+<!-- Compilation Summary -->
+<div id="summarybody" class="ui-tabs-panel">
+<table cellpadding="1" cellspacing="4">
+<tr><td>C source code generated on:</td><td>16-Nov-2021 14:32:07</td></tr>
+<tr><td>Number of errors:</td><td><a href="javascript:selectMessagesTab();">1</a></td></tr>
+<tr><td>Number of warnings:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
+<tr><td>Number of notices:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
+</table>
+<p/><p/><table>
+<tr><td><b>Tell Us What You Think</b></td></tr>
+<tr><td>We value your feedback. Please take a few minutes to answer this short questionnaire regarding the Code Generation Report.</td></tr>
+<tr><td><a href="matlab: emlcprivate('launchReportSurvey');">&gt;&gt;Provide Feedback</a></td></tr>
+</table>
+</div>
+
+<!-- Message Table -->
+<div id="messagesbody" class="ui-tabs-panel hidden">
+<table class="grid" summary="This table lists the messages produced during code generation." cellspacing="0" cellpadding="6">
+<thead>
+<tr>
+<th id="msgorder" scope="col"><div class="d1"><div class="d2"><a href="#">Order</a></div></div></th>
+<th id="msgtype" scope="col"><div class="d1"><div class="d2"><a href="#">Type</a></div></div></th>
+<th id="function" scope="col"><div class="d1"><div class="d2"><a href="#">Function</a></div></div></th>
+<th id="location" scope="col"><div class="d1"><div class="d2"><a href="#">Line</a></div></div></th>
+<th id="text" scope="col"><div class="d1"><div class="d2"><a href="#">Description</a></div></div></th>
+</tr>
+</thead>
+<tbody onmouseover="messagesMouseOver(event);" onmouseout="messagesMouseOut(event);" onclick="messagesClick(event);">
+<tr class="message error" id="M1F176">
+<td class="msgorder" headers="msgorder"><a href="#">1</a></td>
+<td class="failed" headers="msgtype"></td>
+<td class="function" headers="function"><div>ModulSigmoid/stepImpl</div></td>
+<td class="location" headers="location"><div>100</div></td>
+<td class="text" headers="text"><div>Code generation does not support display for MATLAB classes. 'ModulSigmoid' is a class.</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Watchlist Table -->
+<div id="watchlistbody" class="ui-tabs-panel hidden">
+</div>
+<div id="watchloadbody" class="ui-tabs-panel hidden">
+Loading Variables table ...
+</div>
+
+
+<!-- Potential Differences -->
+<div id="potentialDifferencesBody" class="ui-tabs-panel hidden">
+</div>
+
+</div>
+<!-- Begin MATLAB Code Panel -->
+<div class="center">
+<div class="center-title">
+<div class="ui-tabs-nav-item ui-tabs-selected">
+<span class="functiontitle">
+</span>
+<!-- Begin Call Sites -->
+<span id="callsiteselecttable" class="call-sites-tbl">
+<span id="callsiteselectlabel" class="filtered">Calls:</span>
+<select id="callsiteselect" onchange="callSiteChange(event)">
+<option value="callsiteprompt">Select a function call:</option>
+</select>
+</span>
+<!-- End Call Sites -->
+</div>
+</div>
+<div class="ui-tabs-panel">
+<iframe id="hiddenCodeFrame"></iframe>
+<div class="code" onmouseover="mcodeMouseOver(event);" onmouseout="mcodeMouseOut(event);"onclick="mcodeClick(event);">
+</div>
+</div>
+</div>
+<!-- End MATLAB Code Panel -->
+</body>
+</html>
