@@ -4,9 +4,9 @@ class ClassFun:
     def __init__(self):
         pass
 
-        self.works = { WorkingWay.Work: "E:\ExchangeRateStability\Log\DanPy",
-                        WorkingWay.Work64: "E:\ExchangeRateStability\Log\DanPy\\64",
-                        WorkingWay.Work128: "E:\ExchangeRateStability\Log\DanPy\\128",
+        self.works = { WorkingWay.Work: "E:\Motorcycle\Data\Py\\Basa",
+                        WorkingWay.Work64: "E:\Motorcycle\Data\Py\\64",
+                        WorkingWay.Work128: "E:\Motorcycle\Data\Py\\128",
                         WorkingWay.Home: "E:\!!!!ateStability\Log\DanPy"
                       }
 
