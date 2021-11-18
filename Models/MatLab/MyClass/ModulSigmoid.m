@@ -10,7 +10,8 @@ classdef ModulSigmoid < matlab.System
         sm_bet = 0.3
         alfa = 1.0 
         sm_alfa = 0.3
-        
+        kStd=4;
+        alfaExp=0.5;
     end
 
     % Public, non-tunable properties
@@ -26,8 +27,11 @@ classdef ModulSigmoid < matlab.System
     properties(Access = private)
         d = zeros(6, 101);
         ind = 1;
-        dSlipp = [0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0];
+        dSlipp = zeros(1, 30);
         lSlipp = 0;
+        R=0;
+        alfa1=0;
+        Y0=0;
     end
 
     methods
@@ -36,7 +40,8 @@ classdef ModulSigmoid < matlab.System
             % Support name-value pair arguments when constructing object
             setProperties(obj,nargin,varargin{:})
             obj.ind=1;
-
+            obj.R =  obj.Rwheel  *  obj.Transfer;
+            
              for i=1:6
                  for j=1:101
                      obj.d(i, j)= CalcSigm(obj, i-1,   j-1);       
@@ -51,7 +56,7 @@ classdef ModulSigmoid < matlab.System
              end
              
              obj.lSlipp = length(obj.dSlipp);
-             
+             obj.alfa1 = 1-obj.alfaExp;
          end
     end
 
@@ -62,62 +67,67 @@ classdef ModulSigmoid < matlab.System
             y  =  1. / (1 + ((obj.alfa+k* obj.sm_alfa) * exp(-(obj.betta +k*obj.sm_bet) * (j /10  - (obj.sd-k*obj.sdsn)))));
         end
         
-        function [k, v]  = Slippage(obj, vBelt,  rotv)
-            z=0;
-            R =  obj.Rwheel  *  obj.Transfer;
-            
-            if rotv <= 10
-                x = 0;
-            else
-                x = 1 - (vBelt)/(rotv'*R );            
+        function [ k, v]  = Slippage(obj, vBelt,  rotv)
+            k=1;
+            x = 0;
+            if rotv >= 10
+                x = 1 - (vBelt)/(rotv' * obj.R );            
             end
             v=x;
             obj.dSlipp( 2:obj.lSlipp) = obj.dSlipp(1:obj.lSlipp-1);
             obj.dSlipp(1) = x;
-
-            if obj.dSlipp(1)>obj.dSlipp(6)
-                obj.ind = min(obj.ind+1,  6);
-            elseif obj.dSlipp(1)<obj.dSlipp(6)                
-                obj.ind = max(obj.ind-1, 1);
-            else
-                      obj.ind = obj.ind;
+            
+            % I - Режим формирования массива dSlipp  
+            if obj.dSlipp(obj.lSlipp)==0
+                return;
             end
-            obj.ind = min(max(obj.ind, 1), 6);
-             k = obj.ind;
-                
-%              if obj.dSlipp(obj.lSlipp) ~= 0
-%                  obj.ind=1;
-%              else
-%                  sr = sum(obj.dSlipp)/obj.lSlipp;
-%                  sd = std(obj.dSlipp)/10;
-% %                 if obj.dSlipp(1)>(sr + sd)
-%                  if obj.dSlipp(1)>obj.dSlipp(5)
-%                      obj.ind = min(obj.ind+1,  6);
-% %                 elseif obj.dSlipp(1)<(sr - sd)
-%                  elseif obj.dSlipp(1)<obj.dSlipp(5)
-%                      obj.ind = max(obj.ind-1, 0);
-%                  else
-%                      obj.ind = obj.ind;
-%                  end
-% %                  if x < obj.Kreset  % если значения x меньше 
-% %                      obj.ind = 1;
-% %                  end
-%              end
-%              obj.ind = max(obj.ind, 1);
-%              k = obj.ind;
+
+            sr = sum(obj.dSlipp)/length(obj.dSlipp);
+            std4 = std(obj.dSlipp)*obj.kStd;
+            % II - Режим ind == 1
+            if obj.ind==1
+                if obj.dSlipp(1)>(sr + std4)   
+                    obj.ind = min(obj.ind+1, 6);
+                    k = obj.ind;
+                    return;
+                end            
+                if obj.dSlipp(1)<(sr - std4)   
+                    obj.ind=max(obj.ind-1, 1);
+                    k = obj.ind;
+                    return;
+                end
+                return;
+            end
+            % III - Режим ind > 1
+            if (obj.dSlipp(1)>(sr + std4)) & (obj.dSlipp(1)>obj.dSlipp(2))
+                    obj.ind=min(obj.ind+1, 6);
+                    k = obj.ind;
+                    return;
+                end
+                if (obj.dSlipp(1)<(sr - std4)) & (obj.dSlipp(1)<obj.dSlipp(2))
+                    obj.ind=max(obj.ind-1, 1);
+                    k = obj.ind;
+                    return
+                end
+                k = obj.ind;
+                obj.dSlipp(1)=obj.dSlipp(2);        
         end
         
         function setupImpl(obj)
             % Perform one-time calculations, such as computing constants
         end
 
-        function [y, k, v ]= stepImpl(obj, signal,  vBelt,  rotv)  % , ss
+        function [y, k, v, ye, yinver ]= stepImpl(obj, signal,  vBelt,  rotv)  % , ss
             [k, v] = Slippage(obj, vBelt,  rotv);
             y = obj.d(obj.ind, max(min(round(signal), 100), 1))
+            ye =min( obj.alfaExp * y +obj.alfa1 *  obj.Y0, 1);  % без этой строчки может бать отрицательный момент - торможение
+            obj.Y0 = ye;
+            yinver=1-ye;
         end
 
         function resetImpl(obj)
             % Initialize / reset discrete-state properties
+            obj.dSlipp(:)=0;
         end
 
         %% Backup/restore functions
