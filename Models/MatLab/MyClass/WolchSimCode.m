@@ -1,5 +1,5 @@
 %classdef WolchSimCode < handle & matlab.System & matlab.system.mixin.Propagates
-classdef WolchSimCode < handle & matlab.System  %& matlab.system.mixin.Propagates
+classdef WolchSimCode <matlab.System  %  handle &  matlab.system.mixin.Propagates
 %    properties
 %    end
     properties(SetAccess  = public)
@@ -174,9 +174,9 @@ classdef WolchSimCode < handle & matlab.System  %& matlab.system.mixin.Propagate
 
         function [Y, Ynorm] = stepImpl(obj, u, norm)
             obj.msp(1, 2:obj.nWht) = obj.msp(1, 1:obj.nWht-1);
-            obj.msp(1,1) = u;
-            Y = sum(abs(obj.msp * obj.kw));            
-            Ynorm =  min((Y/norm)*obj.kMul, obj.kMul   );
+            obj.msp(1,1) = double(u);
+            Y = double(sum(abs(obj.msp * obj.kw)));            
+            Ynorm =  double(min((Y/norm)*obj.kMul, obj.kMul   ));
         end
 
         function resetImpl(obj)
