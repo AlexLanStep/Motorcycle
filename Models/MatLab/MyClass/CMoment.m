@@ -1,4 +1,5 @@
-classdef CMoment < matlab.System
+classdef CMoment < handle &  matlab.System
+    %  handle &  
     % Untitled2 Add summary here
     %
     % NOTE: When renaming the class name Untitled2, the file name
@@ -18,13 +19,11 @@ classdef CMoment < matlab.System
     end
 
     properties(Access  = private)
-        X =   [600.0, 1000.0, 1250.0, 1500.0, 1750.0, 2000.0, 2250.0, 2500.0, 2750.0, 3000.0, 3500.0, 4000.0, 4500.0, 5000.0, 57500.0, 65000.0 ]
-        Y =   [0.0, 5.0049, 9.9976, 15.0024]
-        Z =  [0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0;
-                35.9,  28.5,   23.0,   18.1,   16.2,   14.2,   10.7,   9.7,    9.1,    9.8,    10.9,   11.8,   13.40,  16.3,   19.0,   20.0;
-                80.20,  68.6,    58.5,   53.3,   47.0,   45.0,   42.1,   39.8,   38.0,   36.7,   38.0,   35.3,   36.4,   38.1,   43.0,   42.0 ;
-                123.20, 105.5,   95.1,   87.2,   81.0,   75.9,   71.9,   68.6,   64.8,   64.6,   64.4,   62.4,   62.3,   63.0,   65.0,   64.2 ]        
-            
+%        nReg, indT
+        NCount, nm;
+        m = zeros(1, 200);              
+
+        x0,  xsum, x2sum, x_sr, x_0, x_01, x_001, xsum2, z0, z01, z002;
     end
     properties(DiscreteState)
 
@@ -40,6 +39,9 @@ classdef CMoment < matlab.System
         function obj = CMoment(varargin)
             % Support name-value pair arguments when constructing object
             setProperties(obj,nargin,varargin{:})
+            obj.NCount = 200;
+            obj.nm = 20;
+            
         end
     end
 
@@ -50,13 +52,47 @@ classdef CMoment < matlab.System
             
         end
 
-        function out1 = stepImpl(obj, dx, dy)
-            % Implement algorithm. Calculate y as a function of input u and
-            % discrete states.
-            out1 = interp2(obj.X, obj.Y, obj.Z, dx, dy, 'spline')  ;
-            n=10
-            step=0.01
-            x = [0:step:(n-1)*step]
+        function [outMoment]  = stepImpl(obj, moment, npoint, err)
+            n = max(min(npoint, 200), 6);
+            obj.nm = n;
+            obj.m(1, 1:obj.NCount-1) = obj.m(1,  2:obj.NCount);
+            if err==0
+                obj.m(1, obj.NCount) = double(moment);    
+            else
+                obj.m(1, obj.NCount) = double(obj.m(1, obj.NCount-1));    
+            end
+            
+            
+            if obj.NCount ~= npoint
+                obj.NCount = npoint;
+                obj.x0 = [0:n-1];
+                obj.xsum = sum(obj.x0(1,1:n));
+                obj.x2sum = sum(obj.x0.^2);
+                obj.x_sr = obj.xsum / n;
+                obj.x_0 = obj.x0 -obj.x_sr;
+                dx = obj.x_0.*obj.x_0;
+                obj.x_01 = sum(obj.x_0.^2);
+                obj.x_001 = 1/obj.x_01;
+                obj.xsum2 = obj.xsum * obj.xsum;
+                obj.z0 = obj.x2sum / obj.xsum2;
+                obj.z01 = 1 / (1 - (obj.z0 * n));
+                obj.z002 = 1 / obj.xsum;
+            end
+
+            
+            yy = obj.m(1,  obj.NCount- obj.nm +1: obj.NCount);
+            ysum = sum(yy);
+            y2sum = sum(yy.^2);
+            xy = obj.x0.*yy;
+            xysum = sum(xy);
+            y_sr = ysum / n;
+            y_0 = yy-y_sr;
+            su = sum(obj.x_0.* y_0);
+            b = su*obj.x_001;
+            z1 = xysum*obj.z002;
+            betta = (z1-obj.z0*ysum)*obj.z01;
+            alfa = (ysum - betta * n) * obj.z002;
+            outMoment = alfa*(n-round(n/3))+betta;
         end
 
         function resetImpl(obj)
@@ -85,7 +121,7 @@ classdef CMoment < matlab.System
         end
 
         %% Advanced functions
-        function validateInputsImpl(obj,u, v)
+        function validateInputsImpl(obj, moment, npoint, err)
             % Validate inputs to the step method at initialization
         end
 
@@ -116,3 +152,36 @@ classdef CMoment < matlab.System
         end
     end
 end
+
+
+%{
+            x0 = [0:n-1];
+            xsum = sum(x0(1,1:n));
+            x2sum = sum(x0.^2);
+            x_sr = xsum / n;
+            x_0 = x0 -x_sr;
+            x_01 = sum(x_0.^2);
+            x_001 = 1/x_01;
+            xsum2 = xsum * xsum;
+            z0 = x2sum / xsum2;
+            z01 = 1 / (1 - (z0 * n));
+            z002 = 1 / xsum;
+            
+             yy = obj.m(1,  obj.NCount- obj.nm +1: obj.NCount);
+            ysum = sum(yy);
+            y2sum = sum(yy.^2);
+            xy = x0.*yy;
+            xysum = sum(xy);
+            y_sr = ysum / n;
+            y_0 = yy-y_sr;
+            su = sum(x_0.* y_0);
+            b = su*x_001;
+            z1 = xysum*z002;
+            betta = (z1-z0*ysum)*z01;
+            alfa = (ysum - betta * n) * z002;
+%            ugol =  atan(alfa) * 180 / pi;
+%            ww = round(n/3)
+            outMoment = alfa*(n-round(n/3))+betta;
+%             y = alfa*(round(n/3))+betta;
+
+%}
