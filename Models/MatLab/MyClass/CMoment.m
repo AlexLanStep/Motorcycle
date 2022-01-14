@@ -1,4 +1,4 @@
-classdef CMoment < handle &  matlab.System
+classdef CMoment <  matlab.System
     %  handle &  
     % Untitled2 Add summary here
     %
@@ -40,7 +40,7 @@ classdef CMoment < handle &  matlab.System
             % Support name-value pair arguments when constructing object
             setProperties(obj,nargin,varargin{:})
             obj.NCount = 200;
-            obj.nm = 20;
+            obj.nm = -1;
             
         end
     end
@@ -52,7 +52,7 @@ classdef CMoment < handle &  matlab.System
             
         end
 
-        function [outMoment]  = stepImpl(obj, moment, npoint, err)
+        function outMoment  = stepImpl(obj, moment, npoint, err)
             n = max(min(npoint, 200), 6);
             obj.nm = n;
             obj.m(1, 1:obj.NCount-1) = obj.m(1,  2:obj.NCount);
@@ -62,9 +62,11 @@ classdef CMoment < handle &  matlab.System
                 obj.m(1, obj.NCount) = double(obj.m(1, obj.NCount-1));    
             end
             
+%            kodError = length(obj.x0)
             
-            if obj.NCount ~= npoint
-                obj.NCount = npoint;
+            
+%            if (obj.nm ~= n) | (kodError==0)
+                obj.nm = n;
                 obj.x0 = [0:n-1];
                 obj.xsum = sum(obj.x0(1,1:n));
                 obj.x2sum = sum(obj.x0.^2);
@@ -77,7 +79,7 @@ classdef CMoment < handle &  matlab.System
                 obj.z0 = obj.x2sum / obj.xsum2;
                 obj.z01 = 1 / (1 - (obj.z0 * n));
                 obj.z002 = 1 / obj.xsum;
-            end
+%            end
 
             
             yy = obj.m(1,  obj.NCount- obj.nm +1: obj.NCount);
@@ -155,33 +157,33 @@ end
 
 
 %{
-            x0 = [0:n-1];
-            xsum = sum(x0(1,1:n));
-            x2sum = sum(x0.^2);
-            x_sr = xsum / n;
-            x_0 = x0 -x_sr;
-            x_01 = sum(x_0.^2);
-            x_001 = 1/x_01;
-            xsum2 = xsum * xsum;
-            z0 = x2sum / xsum2;
-            z01 = 1 / (1 - (z0 * n));
-            z002 = 1 / xsum;
-            
-             yy = obj.m(1,  obj.NCount- obj.nm +1: obj.NCount);
-            ysum = sum(yy);
-            y2sum = sum(yy.^2);
-            xy = x0.*yy;
-            xysum = sum(xy);
-            y_sr = ysum / n;
-            y_0 = yy-y_sr;
-            su = sum(x_0.* y_0);
-            b = su*x_001;
-            z1 = xysum*z002;
-            betta = (z1-z0*ysum)*z01;
-            alfa = (ysum - betta * n) * z002;
-%            ugol =  atan(alfa) * 180 / pi;
-%            ww = round(n/3)
-            outMoment = alfa*(n-round(n/3))+betta;
-%             y = alfa*(round(n/3))+betta;
+%             x0 = [0:n-1];
+%             xsum = sum(x0(1,1:n));
+%             x2sum = sum(x0.^2);
+%             x_sr = xsum / n;
+%             x_0 = x0 -x_sr;
+%             x_01 = sum(x_0.^2);
+%             x_001 = 1/x_01;
+%             xsum2 = xsum * xsum;
+%             z0 = x2sum / xsum2;
+%             z01 = 1 / (1 - (z0 * n));
+%             z002 = 1 / xsum;
+%             
+%              yy = obj.m(1,  obj.NCount- obj.nm +1: obj.NCount);
+%             ysum = sum(yy);
+%             y2sum = sum(yy.^2);
+%             xy = x0.*yy;
+%             xysum = sum(xy);
+%             y_sr = ysum / n;
+%             y_0 = yy-y_sr;
+%             su = sum(x_0.* y_0);
+%             b = su*x_001;
+%             z1 = xysum*z002;
+%             betta = (z1-z0*ysum)*z01;
+%             alfa = (ysum - betta * n) * z002;
+% %            ugol =  atan(alfa) * 180 / pi;
+% %            ww = round(n/3)
+%             outMoment = alfa*(n-round(n/3))+betta;
+% %             y = alfa*(round(n/3))+betta;
 
 %}
