@@ -3,9 +3,9 @@
  *
  * Code generation for model "Moment_work_2017".
  *
- * Model version              : 1.25
+ * Model version              : 1.32
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Thu Dec 23 14:11:11 2021
+ * C source code generated on : Mon Jan 17 09:51:42 2022
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -20,16 +20,10 @@
 /* Block parameters (auto storage) */
 P_Moment_work_2017_T Moment_work_2017_P = {
   600.0,                               /* Expression: 600
-                                        * Referenced by: '<Root>/Moment'
-                                        */
-  600.0,                               /* Expression: 600
                                         * Referenced by: '<Root>/MomentMin'
                                         */
   6500.0,                              /* Expression: 6500
                                         * Referenced by: '<Root>/MomentMax'
-                                        */
-  10.0,                                /* Expression: 10
-                                        * Referenced by: '<Root>/Acc '
                                         */
   100.0,                               /* Expression: 100
                                         * Referenced by: '<Root>/Constant4'
@@ -119,12 +113,30 @@ P_Moment_work_2017_T Moment_work_2017_P = {
   { 0.0, 5.004882813, 9.997558594, 15.00244141, 19.99511719, 25.0, 30.00488281,
     34.99755859, 40.00244141, 44.99511719, 50.0, 59.99755859, 69.99511719,
     80.00488281, 90.00244141, 100.0 },
+  50.0,                                /* Expression: 50
+                                        * Referenced by: '<Root>/nPoint'
+                                        */
+  20.0,                                /* Expression: 20
+                                        * Referenced by: '<Root>/nPoint1'
+                                        */
+  200.0,                               /* Expression: 200
+                                        * Referenced by: '<Root>/nPoint2'
+                                        */
   0.0,                                 /* Expression: 0
                                         * Referenced by: '<Root>/CanError'
+                                        */
+  0.0,                                 /* Expression: 0.0
+                                        * Referenced by: '<Root>/Delay1'
+                                        */
+  100.0,                               /* Expression: 100
+                                        * Referenced by: '<Root>/LimitatMoment'
                                         */
 
   /*  Computed Parameter: uDLookupTable_maxIndex
    * Referenced by: '<Root>/2-D Lookup Table'
    */
-  { 15U, 15U }
+  { 15U, 15U },
+  1U                                   /* Computed Parameter: Delay1_DelayLength
+                                        * Referenced by: '<Root>/Delay1'
+                                        */
 };

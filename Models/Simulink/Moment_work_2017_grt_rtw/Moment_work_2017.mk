@@ -2,7 +2,7 @@
 ## Makefile generated for Simulink model 'Moment_work_2017'. 
 ## 
 ## Makefile     : Moment_work_2017.mk
-## Generated on : Tue Dec 21 08:10:47 2021
+## Generated on : Mon Jan 17 09:51:46 2022
 ## MATLAB Coder version: 3.3 (R2017a)
 ## 
 ## Build Info:
@@ -218,8 +218,8 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 ###########################################################################
 
 DEFINES_BUILD_ARGS = -DMAT_FILE=1 -DINTEGER_CODE=0 -DMT=0 -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DONESTEPFCN=1 -DTERMFCN=1 -DMULTI_INSTANCE_CODE=0
-DEFINES_IMPLIED = -DTID01EQ=0
-DEFINES_STANDARD = -DMODEL=Moment_work_2017 -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DRT -DUSE_RTMODEL
+DEFINES_IMPLIED = -DTID01EQ=1
+DEFINES_STANDARD = -DMODEL=Moment_work_2017 -DNUMST=2 -DNCSTATES=0 -DHAVESTDIO -DRT -DUSE_RTMODEL
 
 DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_IMPLIED) $(DEFINES_STANDARD)
 

@@ -3,9 +3,9 @@
  *
  * Code generation for model "Moment_work_2017".
  *
- * Model version              : 1.25
+ * Model version              : 1.32
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Thu Dec 23 14:11:11 2021
+ * C source code generated on : Mon Jan 17 09:51:42 2022
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -16,6 +16,8 @@
 
 #ifndef RTW_HEADER_Moment_work_2017_h_
 #define RTW_HEADER_Moment_work_2017_h_
+#include <math.h>
+#include <stdlib.h>
 #include <string.h>
 #include <float.h>
 #include <stddef.h>
@@ -31,7 +33,6 @@
 
 /* Shared type includes */
 #include "multiword_types.h"
-#include "rtGetInf.h"
 #include "rt_nonfinite.h"
 
 /* Macros for accessing real-time model data structure */
@@ -64,33 +65,59 @@
 #endif
 
 #ifndef rtmGetT
-# define rtmGetT(rtm)                  ((rtm)->Timing.taskTime0)
+# define rtmGetT(rtm)                  (rtmGetTPtr((rtm))[0])
 #endif
 
 #ifndef rtmGetTFinal
 # define rtmGetTFinal(rtm)             ((rtm)->Timing.tFinal)
 #endif
 
+/* Block signals (auto storage) */
+typedef struct {
+  real_T FromWorkspace;                /* '<Root>/From Workspace' */
+  real_T FromWorkspace1;               /* '<Root>/From Workspace1' */
+  real_T MATLABSystem4;                /* '<Root>/MATLAB System4' */
+} B_Moment_work_2017_T;
+
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
   CMoment_Moment_work_2017_T obj;      /* '<Root>/MATLAB System4' */
+  real_T Delay1_DSTATE;                /* '<Root>/Delay1' */
+  struct {
+    void *TimePtr;
+    void *DataPtr;
+    void *RSimInfoPtr;
+  } FromWorkspace_PWORK;               /* '<Root>/From Workspace' */
+
+  struct {
+    void *TimePtr;
+    void *DataPtr;
+    void *RSimInfoPtr;
+  } FromWorkspace1_PWORK;              /* '<Root>/From Workspace1' */
+
+  struct {
+    void *LoggedData[2];
+  } Scope_PWORK;                       /* '<Root>/Scope' */
+
   void *MATLABSystem4_PWORK;           /* '<Root>/MATLAB System4' */
+  struct {
+    int_T PrevIndex;
+  } FromWorkspace_IWORK;               /* '<Root>/From Workspace' */
+
+  struct {
+    int_T PrevIndex;
+  } FromWorkspace1_IWORK;              /* '<Root>/From Workspace1' */
+
   boolean_T objisempty;                /* '<Root>/MATLAB System4' */
 } DW_Moment_work_2017_T;
 
 /* Parameters (auto storage) */
 struct P_Moment_work_2017_T_ {
-  real_T Moment_Value;                 /* Expression: 600
-                                        * Referenced by: '<Root>/Moment'
-                                        */
   real_T MomentMin_Value;              /* Expression: 600
                                         * Referenced by: '<Root>/MomentMin'
                                         */
   real_T MomentMax_Value;              /* Expression: 6500
                                         * Referenced by: '<Root>/MomentMax'
-                                        */
-  real_T Acc_Value;                    /* Expression: 10
-                                        * Referenced by: '<Root>/Acc '
                                         */
   real_T Constant4_Value;              /* Expression: 100
                                         * Referenced by: '<Root>/Constant4'
@@ -119,11 +146,29 @@ struct P_Moment_work_2017_T_ {
   real_T uDLookupTable_bp02Data[16];   /* Expression: [0 5.004882813 9.997558594 15.00244141 19.99511719 25 30.00488281 34.99755859 40.00244141 44.99511719 50 59.99755859 69.99511719 80.00488281 90.00244141 100]
                                         * Referenced by: '<Root>/2-D Lookup Table'
                                         */
+  real_T nPoint_Value;                 /* Expression: 50
+                                        * Referenced by: '<Root>/nPoint'
+                                        */
+  real_T nPoint1_Value;                /* Expression: 20
+                                        * Referenced by: '<Root>/nPoint1'
+                                        */
+  real_T nPoint2_Value;                /* Expression: 200
+                                        * Referenced by: '<Root>/nPoint2'
+                                        */
   real_T CanError_Value;               /* Expression: 0
                                         * Referenced by: '<Root>/CanError'
                                         */
+  real_T Delay1_InitialCondition;      /* Expression: 0.0
+                                        * Referenced by: '<Root>/Delay1'
+                                        */
+  real_T LimitatMoment_Value;          /* Expression: 100
+                                        * Referenced by: '<Root>/LimitatMoment'
+                                        */
   uint32_T uDLookupTable_maxIndex[2];  /* Computed Parameter: uDLookupTable_maxIndex
                                         * Referenced by: '<Root>/2-D Lookup Table'
+                                        */
+  uint32_T Delay1_DelayLength;         /* Computed Parameter: Delay1_DelayLength
+                                        * Referenced by: '<Root>/Delay1'
                                         */
 };
 
@@ -131,6 +176,7 @@ struct P_Moment_work_2017_T_ {
 struct tag_RTM_Moment_work_2017_T {
   const char_T *errorStatus;
   RTWLogInfo *rtwLogInfo;
+  RTWSolverInfo solverInfo;
 
   /*
    * Timing:
@@ -138,17 +184,24 @@ struct tag_RTM_Moment_work_2017_T {
    * the timing information for the model.
    */
   struct {
-    time_T taskTime0;
     uint32_T clockTick0;
     uint32_T clockTickH0;
     time_T stepSize0;
+    uint32_T clockTick1;
+    uint32_T clockTickH1;
     time_T tFinal;
+    SimTimeStep simTimeStep;
     boolean_T stopRequestedFlag;
+    time_T *t;
+    time_T tArray[2];
   } Timing;
 };
 
 /* Block parameters (auto storage) */
 extern P_Moment_work_2017_T Moment_work_2017_P;
+
+/* Block signals (auto storage) */
+extern B_Moment_work_2017_T Moment_work_2017_B;
 
 /* Block states (auto storage) */
 extern DW_Moment_work_2017_T Moment_work_2017_DW;
