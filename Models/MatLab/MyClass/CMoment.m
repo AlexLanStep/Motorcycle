@@ -1,13 +1,5 @@
 classdef CMoment <  matlab.System
     %  handle &  
-    % Untitled2 Add summary here
-    %
-    % NOTE: When renaming the class name Untitled2, the file name
-    % and constructor name must be updated to use the class name.
-    %
-    % This template includes most, but not all, possible properties,
-    % attributes, and methods that you can implement for a System object.
-
     % Public, tunable properties
     properties
 
@@ -19,19 +11,15 @@ classdef CMoment <  matlab.System
     end
 
     properties(Access  = private)
-%        nReg, indT
         NCount, nm;
         m = zeros(1, 200);              
-
         x0,  xsum, x2sum, x_sr, x_0, x_01, x_001, xsum2, z0, z01, z002;
     end
     properties(DiscreteState)
-
     end
 
     % Pre-computed constants
     properties(Access = private)
-
     end
 
     methods
@@ -41,7 +29,6 @@ classdef CMoment <  matlab.System
             setProperties(obj,nargin,varargin{:})
             obj.NCount = 200;
             obj.nm = -1;
-            
         end
     end
 
@@ -49,7 +36,6 @@ classdef CMoment <  matlab.System
         %% Common functions
         function setupImpl(obj)
             % Perform one-time calculations, such as computing constants
-            
         end
 
         function outMoment  = stepImpl(obj, moment, npoint, err)
@@ -63,7 +49,6 @@ classdef CMoment <  matlab.System
             end
             
 %            kodError = length(obj.x0)
-            
             
 %            if (obj.nm ~= n) | (kodError==0)
                 obj.nm = n;
@@ -154,36 +139,3 @@ classdef CMoment <  matlab.System
         end
     end
 end
-
-
-%{
-%             x0 = [0:n-1];
-%             xsum = sum(x0(1,1:n));
-%             x2sum = sum(x0.^2);
-%             x_sr = xsum / n;
-%             x_0 = x0 -x_sr;
-%             x_01 = sum(x_0.^2);
-%             x_001 = 1/x_01;
-%             xsum2 = xsum * xsum;
-%             z0 = x2sum / xsum2;
-%             z01 = 1 / (1 - (z0 * n));
-%             z002 = 1 / xsum;
-%             
-%              yy = obj.m(1,  obj.NCount- obj.nm +1: obj.NCount);
-%             ysum = sum(yy);
-%             y2sum = sum(yy.^2);
-%             xy = x0.*yy;
-%             xysum = sum(xy);
-%             y_sr = ysum / n;
-%             y_0 = yy-y_sr;
-%             su = sum(x_0.* y_0);
-%             b = su*x_001;
-%             z1 = xysum*z002;
-%             betta = (z1-z0*ysum)*z01;
-%             alfa = (ysum - betta * n) * z002;
-% %            ugol =  atan(alfa) * 180 / pi;
-% %            ww = round(n/3)
-%             outMoment = alfa*(n-round(n/3))+betta;
-% %             y = alfa*(round(n/3))+betta;
-
-%}
