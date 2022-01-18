@@ -38,13 +38,13 @@ def calc(index):
 
 
 if __name__ == '__main__':
-    wb = load_workbook("E:\Motorcycle\Data\MatLab\Mixail\Acceleration.xlsx", read_only=True)
-    _db_name = "Mixa"
+    wb = load_workbook("E:\Motorcycle\Data\MatLab\Mixail\HVB_pwr2.xlsx", read_only=True)
+    _db_name = "FMixa"
     __namefile = f"E:\Motorcycle\Data\MatLab\Mixail\{_db_name}.mat"
     print(wb.sheetnames)
     ws = wb.active
-    _ls_name = ["Acc", "Moment", "Oborot"]
-    ls = find_index('A1', 'P1', ['APP_r', 'AccPed_trqEng_mp', 'p_7_INV_1_ActualEngineSpeedFromCAN'])
+    _ls_name = ["AC_pwrAct"]
+    ls = find_index('A1', 'P1', ['AC_pwrAct' ])
 
     try:
         _z = ls.index(0)
