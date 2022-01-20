@@ -3,9 +3,9 @@
  *
  * Code generation for model "MixailFiltr".
  *
- * Model version              : 1.35
+ * Model version              : 1.36
  * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C source code generated on : Tue Jan 18 07:53:17 2022
+ * C source code generated on : Thu Jan 20 14:03:08 2022
  *
  * Target selection: grt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -17,9 +17,8 @@
 #ifndef RTW_HEADER_MixailFiltr_h_
 #define RTW_HEADER_MixailFiltr_h_
 #include <math.h>
-#include <stdlib.h>
-#include <string.h>
 #include <float.h>
+#include <string.h>
 #include <stddef.h>
 #ifndef MixailFiltr_COMMON_INCLUDES_
 # define MixailFiltr_COMMON_INCLUDES_
@@ -27,7 +26,6 @@
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
 #include "rt_logging.h"
-#include "stdlib.h"
 #endif                                 /* MixailFiltr_COMMON_INCLUDES_ */
 
 #include "MixailFiltr_types.h"
@@ -73,41 +71,26 @@
 # define rtmGetTFinal(rtm)             ((rtm)->Timing.tFinal)
 #endif
 
-/* Block signals (auto storage) */
-typedef struct {
-  real_T DigitalFilter;                /* '<S1>/Digital Filter' */
-} B_MixailFiltr_T;
-
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
-  real_T SineWave_AccFreqNorm;         /* '<Root>/Sine Wave' */
-  real_T DigitalFilter_FILT_STATES[4]; /* '<S1>/Digital Filter' */
-  real_T RandomSource_STATE_DWORK[35]; /* '<Root>/Random Source' */
+  MixailFiltr1_MixailFiltr_T obj;      /* '<Root>/MATLAB System' */
   struct {
-    void *LoggedData[3];
+    void *TimePtr;
+    void *DataPtr;
+    void *RSimInfoPtr;
+  } FromWorkspace_PWORK;               /* '<Root>/From Workspace' */
+
+  struct {
+    void *LoggedData[2];
   } Scope_PWORK;                       /* '<Root>/Scope' */
 
-  uint32_T RandomSource_SEED_DWORK;    /* '<Root>/Random Source' */
-} DW_MixailFiltr_T;
+  void *MATLABSystem_PWORK;            /* '<Root>/MATLAB System' */
+  struct {
+    int_T PrevIndex;
+  } FromWorkspace_IWORK;               /* '<Root>/From Workspace' */
 
-/* Parameters (auto storage) */
-struct P_MixailFiltr_T_ {
-  real_T SineWave_Amplitude;           /* Mask Parameter: SineWave_Amplitude
-                                        * Referenced by: '<Root>/Sine Wave'
-                                        */
-  real_T SineWave_Frequency;           /* Mask Parameter: SineWave_Frequency
-                                        * Referenced by: '<Root>/Sine Wave'
-                                        */
-  real_T RandomSource_MaxVal;          /* Mask Parameter: RandomSource_MaxVal
-                                        * Referenced by: '<Root>/Random Source'
-                                        */
-  real_T RandomSource_MinVal;          /* Mask Parameter: RandomSource_MinVal
-                                        * Referenced by: '<Root>/Random Source'
-                                        */
-  real_T SineWave_Phase;               /* Mask Parameter: SineWave_Phase
-                                        * Referenced by: '<Root>/Sine Wave'
-                                        */
-};
+  boolean_T objisempty;                /* '<Root>/MATLAB System' */
+} DW_MixailFiltr_T;
 
 /* Real-time Model Data Structure */
 struct tag_RTM_MixailFiltr_T {
@@ -128,12 +111,6 @@ struct tag_RTM_MixailFiltr_T {
     boolean_T stopRequestedFlag;
   } Timing;
 };
-
-/* Block parameters (auto storage) */
-extern P_MixailFiltr_T MixailFiltr_P;
-
-/* Block signals (auto storage) */
-extern B_MixailFiltr_T MixailFiltr_B;
 
 /* Block states (auto storage) */
 extern DW_MixailFiltr_T MixailFiltr_DW;
@@ -161,7 +138,5 @@ extern RT_MODEL_MixailFiltr_T *const MixailFiltr_M;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'MixailFiltr'
- * '<S1>'   : 'MixailFiltr/Digital Filter Design'
- * '<S2>'   : 'MixailFiltr/Digital Filter Design/Check Signal Attributes'
  */
 #endif                                 /* RTW_HEADER_MixailFiltr_h_ */

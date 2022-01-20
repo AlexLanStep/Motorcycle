@@ -1,6 +1,8 @@
 from openpyxl import load_workbook
 import numpy as np
 import os
+import matplotlib.pyplot as plt
+
 import scipy.io as sio
 
 '''
@@ -53,12 +55,31 @@ if __name__ == '__main__':
     except:
         print(" Столбцы определены !")
 
+    '''
     danx = {_ls_name[i]: calc(ls[i]) for i in range(len(_ls_name))}
     sio.savemat(__namefile, {_db_name:danx})
     for key, val in danx.items():
         print(key)
-        np.save(f'E:\Motorcycle\Data\Py\Moment/1/{key}', np.array(val))
+#        np.save(f'E:\Motorcycle\Data\Py\Moment/1/{key}', np.array(val))
+        np.save(f'E:\Motorcycle\Data\Py\Moment\Filtr/{key}', np.array(val))
+    '''
+    with open('E:\Motorcycle\Data\Py\Moment\Filtr/ACCFiltr.npy', 'rb') as f:
+        a = np.load(f)
+
+    kkk=1
+    plt.figure()
+    plt.plot(a)
+    plt.show()
 
     print("  !!!   все  !!")
 
     k = 1
+
+'''
+with open('test.npy', 'wb') as f:
+    np.save(f, np.array([1, 2]))
+    np.save(f, np.array([1, 3]))
+with open('test.npy', 'rb') as f:
+    a = np.load(f)
+    b = np.load(f)
+'''

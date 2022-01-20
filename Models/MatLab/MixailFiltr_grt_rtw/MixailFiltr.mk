@@ -2,7 +2,7 @@
 ## Makefile generated for Simulink model 'MixailFiltr'. 
 ## 
 ## Makefile     : MixailFiltr.mk
-## Generated on : Tue Jan 18 07:53:22 2022
+## Generated on : Thu Jan 20 14:03:13 2022
 ## MATLAB Coder version: 3.3 (R2017a)
 ## 
 ## Build Info:
@@ -209,7 +209,7 @@ BUILD_TYPE = "Top-Level Standalone Executable"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = -I$(START_DIR) -I$(MATLAB_ROOT)/simulink/include/sf_runtime -I$(START_DIR)/MixailFiltr_grt_rtw -IE:/Motorcycle/Models/Simulink -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common -I$(MATLAB_ROOT)/toolbox/dsp/include -I$(MATLAB_ROOT)/toolbox/dsp/extern/src/export/include/src -I$(MATLAB_ROOT)/toolbox/dsp/extern/src/export/include -I$(MATLAB_ROOT)/toolbox/shared/dsp/vision/matlab/include
+INCLUDES_BUILDINFO = -I$(START_DIR) -I$(MATLAB_ROOT)/simulink/include/sf_runtime -I$(START_DIR)/MixailFiltr_grt_rtw -IE:/Motorcycle/Models/Simulink -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -227,7 +227,7 @@ DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_IMPLIED) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/MixailFiltr_grt_rtw/MixailFiltr.c $(START_DIR)/MixailFiltr_grt_rtw/MixailFiltr_data.c $(START_DIR)/MixailFiltr_grt_rtw/rtGetInf.c $(START_DIR)/MixailFiltr_grt_rtw/rtGetNaN.c $(START_DIR)/MixailFiltr_grt_rtw/rt_nonfinite.c rt_logging.c
+SRCS = $(START_DIR)/MixailFiltr_grt_rtw/MixailFiltr.c $(START_DIR)/MixailFiltr_grt_rtw/rtGetInf.c $(START_DIR)/MixailFiltr_grt_rtw/rtGetNaN.c $(START_DIR)/MixailFiltr_grt_rtw/rt_nonfinite.c rt_logging.c
 
 MAIN_SRC = $(MATLAB_ROOT)/rtw/c/src/common/rt_main.c
 
@@ -237,7 +237,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = MixailFiltr.obj MixailFiltr_data.obj rtGetInf.obj rtGetNaN.obj rt_nonfinite.obj rt_logging.obj
+OBJS = MixailFiltr.obj rtGetInf.obj rtGetNaN.obj rt_nonfinite.obj rt_logging.obj
 
 MAIN_OBJ = rt_main.obj
 
