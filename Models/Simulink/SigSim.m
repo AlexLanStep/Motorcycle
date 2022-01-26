@@ -62,6 +62,7 @@ classdef SigSim <  handle & matlab.System & matlab.system.mixin.Propagates
             else
                 y=obj.u_tek;
             end
+
             
             x=y - obj.y_old;
             y = obj.y_old + obj.alfa_ema*(x);
