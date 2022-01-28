@@ -41,12 +41,14 @@ def calc(index):
 
 if __name__ == '__main__':
     wb = load_workbook("E:\Motorcycle\Data\MatLab\Mixail\HVB_pwr2.xlsx", read_only=True)
-    _db_name = "FMixa"
+    _db_name = "HVBMixa"
     __namefile = f"E:\Motorcycle\Data\MatLab\Mixail\{_db_name}.mat"
     print(wb.sheetnames)
     ws = wb.active
-    _ls_name = ["AC_pwrAct"]
-    ls = find_index('A1', 'P1', ['AC_pwrAct' ])
+#    _ls_name = ["AC_pwrAct"]
+#    ls = find_index('A1', 'P1', ['AC_pwrAct' ])
+    _ls_name = ["HVB_pwrAct"]
+    ls = find_index('A1', 'P1', ['HVB_pwrAct'])
 
     try:
         _z = ls.index(0)
@@ -55,21 +57,23 @@ if __name__ == '__main__':
     except:
         print(" Столбцы определены !")
 
-    '''
     danx = {_ls_name[i]: calc(ls[i]) for i in range(len(_ls_name))}
-    sio.savemat(__namefile, {_db_name:danx})
+    # sio.savemat(__namefile, {_db_name:danx})
+
+
+    
     for key, val in danx.items():
         print(key)
-#        np.save(f'E:\Motorcycle\Data\Py\Moment/1/{key}', np.array(val))
+        np.save(f'E:\Motorcycle\Data\Py\Moment/1/{key}', np.array(val))
         np.save(f'E:\Motorcycle\Data\Py\Moment\Filtr/{key}', np.array(val))
-    '''
-    with open('E:\Motorcycle\Data\Py\Moment\Filtr/ACCFiltr.npy', 'rb') as f:
-        a = np.load(f)
+
+    # with open('E:\Motorcycle\Data\Py\Moment\Filtr/HVB.npy', 'rb') as f:
+    #     a = np.load(f)
 
     kkk=1
-    plt.figure()
-    plt.plot(a)
-    plt.show()
+    # plt.figure()
+    # plt.plot(a)
+    # plt.show()
 
     print("  !!!   все  !!")
 
