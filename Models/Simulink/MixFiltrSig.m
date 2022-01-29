@@ -1,4 +1,4 @@
-classdef MixFiltrSig < handle  &  matlab.System & matlab.system.mixin.Propagates
+classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
     %handle  & matlab.System & matlab.system.mixin.Propagates
 
     % Public, tunable properties
@@ -46,7 +46,6 @@ classdef MixFiltrSig < handle  &  matlab.System & matlab.system.mixin.Propagates
             % Support name-value pair arguments when constructing object
             %setProperties(obj,nargin,varargin{:})
             mysetup(obj)
-   %         setupImpl(obj)            
         end
     end
 
