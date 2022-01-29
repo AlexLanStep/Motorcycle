@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
+=======
+classdef MixFiltrSig <   matlab.System  %& matlab.system.mixin.Propagates
+>>>>>>> 58925e529482e008a2fc07d6f3504cf55412d7b8
     %handle  & matlab.System & matlab.system.mixin.Propagates
 
     % Public, tunable properties
@@ -16,23 +20,28 @@ classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
     end
     % Pre-computed constants
     properties(SetAccess  = private)
-        M1 = zeros(51, 1)
-        M1count = 51 
-        M2 = zeros(29, 1)
-        M2count =  29
+%        M1 = zeros(51, 1)
+%        M1count = 51 
+        M1 = zeros(41, 1)
+        M1count = 41 
+%        M2 = zeros(29, 1)
+%        M2count =  29
+        M2 = zeros(23, 1)
+        M2count =  23
         M3 =  zeros(15, 1)
         M3count =  15
         
         myFront = struct('front', 0, 'frontCount', 0, 'is_front', false,...
                             'i_tik', 1, 'i_tik_save', 0, 'i_sum_front', 0, ...
                             'i_sum_tek_front', 0, 'i_n_count_ntime', 0,...
-                            'is_signal', false,  'i_nCount_tic_null', 70)
+                            'is_signal', false,  'i_nCount_tic_null', 50)       % 70
         mySigmoid = struct('IsForm', false, 'nCount', 0)
         point = struct('y1', 0, 'y0', 0)
         ind = struct('sig', 0, 'nCount', 0, 'i', 0)
         i=0, j=0, k=0, 
         u_tek=0, u_delta=0, u_sm=0, u_sig_k=0
-        y_old=0.0, nEma=0, alfa_ema=0.0
+        y_old=0.0, nEma=0, alfa_ema=0.0, alfa_ema1=0.0
+        
     end
 
     % Pre-computed constants
@@ -45,13 +54,16 @@ classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
         function obj = MixFiltrSig(varargin)
             % Support name-value pair arguments when constructing object
             %setProperties(obj,nargin,varargin{:})
+<<<<<<< HEAD
             mysetup(obj)
+=======
+>>>>>>> 58925e529482e008a2fc07d6f3504cf55412d7b8
         end
     end
 
     methods(Access = protected)
 %    methods(Access = public)
-        %% Common functions
+        %% Common functions  Инициализация переменных
         function setupImpl(obj)
             obj.u_tek = 0; 
             obj.u_delta = 0; 
@@ -59,27 +71,13 @@ classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
             set_sig(obj);
             obj.i=0;
             obj.u_sig_k=0;
-            obj.myFront.i_nCount_tic_null=70;
+            obj.myFront.i_nCount_tic_null=50;  % 70
             obj.u_sig_k=0.0;
             obj.y_old=0;
-            obj.nEma=5;
+            obj.nEma=15;
             obj.alfa_ema=2/(obj.nEma+1);
+            obj.alfa_ema1 = 1-obj.alfa_ema;
         end
-        
-        function mysetup(obj)
-            obj.u_tek = 0; 
-            obj.u_delta = 0; 
-            obj.u_sm = 0;
-            set_sig(obj);
-            obj.i=0;
-            obj.u_sig_k=0;
-            obj.myFront.i_nCount_tic_null=70;
-            obj.u_sig_k=0.0;
-            obj.y_old=0;
-            obj.nEma=5;
-            obj.alfa_ema=2/(obj.nEma+1);
-        end
-
         
         function y = stepImpl(obj,u)
             if obj.ind.sig==0
@@ -96,11 +94,11 @@ classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
             else
                 y=obj.u_tek;
             end
-            
-            x=y - obj.y_old;
-            y = obj.y_old + obj.alfa_ema*(x);
-            obj.y_old=y;
-            
+%{            
+        формируем EMA 
+            y = obj.y_old*obj.alfa_ema1 + obj.alfa_ema*(y);            
+%}
+            obj.y_old = y;
         end
 
         function resetImpl(obj)
@@ -148,6 +146,15 @@ classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
             % out = propagatedInputSize(obj,1);
         end
 
+        function [out,out2] = isOutputFixedSizeImpl(obj)
+            % Return true for each output port with fixed size
+            out = true;
+            out2 = true;
+
+            % Example: inherit fixed-size status from first input port
+            % out = propagatedInputFixedSize(obj,1);
+        end
+
         function icon = getIconImpl(obj)
             % Define icon for System block
             icon = mfilename('class'); % Use class name
@@ -189,7 +196,6 @@ classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
             
             if ~obj.myFront.is_front
 % нет фронта считаем тики
-                
                 if obj.myFront.i_tik >= obj.myFront.i_nCount_tic_null
                     obj.myFront.i_sum_front=0;
                 end
@@ -213,7 +219,6 @@ classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
                     obj.myFront.i_sum_front = max(obj.myFront.i_sum_front-1, -3);
                 end
             end
-            
         end
         
         function inicial_ind(obj, i0)
@@ -233,18 +238,19 @@ classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
         end
         
         function set_sig(obj)
-            i=0; 
-            j=0; 
-            k=0;
+            i=0;  j=0;  k=0;
             obj.ind.sig=0;
             
             kSig=0.01;
-            nTime=50; alfa=22;
+%            nTime=50; alfa=22;
+            nTime=40; alfa=30;  % - пока не работает нужно переделывать
+%            матрицу и прочее....
             nSigStart=fix(nTime/2);
             tsig=(-kSig*nSigStart: kSig: kSig*nSigStart)';
             obj.M1=(1+exp(-tsig.*alfa)).^-1;
             
-            nTime=28; alfa=40;
+%            nTime=28; alfa=40;
+            nTime=22; alfa=50;
             nSigStart=fix(nTime/2);
             tsig=(-kSig*nSigStart: kSig: kSig*nSigStart)';
             obj.M2=(1+exp(-tsig.*alfa)).^-1;
@@ -253,7 +259,6 @@ classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
             nSigStart=fix(nTime/2);
             tsig=(-kSig*nSigStart: kSig: kSig*nSigStart)';
             obj.M3=(1+exp(-tsig.*alfa)).^-1;
-            
         end
         
         function v = step_func3(obj, u)
@@ -323,3 +328,7 @@ classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
         end
     end
 end
+
+
+
+
