@@ -1,6 +1,18 @@
 classdef MixFiltrSig <   matlab.System  %& matlab.system.mixin.Propagates
     %handle  & matlab.System & matlab.system.mixin.Propagates
-
+%{
+    ћихаил, использую 3 sigmoid 
+    редактировать
+    стр 33, 34 - sig 0
+    стр 37, 38 - sig 1
+    стр 39, 40 - sig 2
+    переключатьль стр 45      'is_signal', false,  'i_nCount_tic_null', 50)
+            -> 70   меньше 10 не ставить
+            стр 78  obj.myFront.i_nCount_tic_null=50;  % 70
+     стр 250  -> nTime=40; alfa=30;  % nTime - врем€ формировани€; alfa-угол
+     стр 257  -> nTime=22; alfa=50;
+     стр 262  -> nTime=14; alfa=80;    
+%}
     % Public, tunable properties
     properties
 
