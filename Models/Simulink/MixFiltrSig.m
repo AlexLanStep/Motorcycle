@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+classdef MixFiltrSig < handle & matlab.System & matlab.system.mixin.Propagates
+=======
 classdef MixFiltrSig <   matlab.System  %& matlab.system.mixin.Propagates
+>>>>>>> 58925e529482e008a2fc07d6f3504cf55412d7b8
     %handle  & matlab.System & matlab.system.mixin.Propagates
 %{
     Михаил, использую 3 sigmoid 
@@ -62,6 +66,10 @@ classdef MixFiltrSig <   matlab.System  %& matlab.system.mixin.Propagates
         function obj = MixFiltrSig(varargin)
             % Support name-value pair arguments when constructing object
             %setProperties(obj,nargin,varargin{:})
+<<<<<<< HEAD
+            mysetup(obj)
+=======
+>>>>>>> 58925e529482e008a2fc07d6f3504cf55412d7b8
         end
     end
 
