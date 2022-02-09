@@ -16,6 +16,9 @@
     <Filter Include="Source">
       <UniqueIdentifier>{44bca246-85c7-4cfb-8d83-d6357c0ed9af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\ReadWriteTxt">
+      <UniqueIdentifier>{ef96c042-9b59-415f-b661-825988e1dc49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test01.cpp">
@@ -27,6 +30,12 @@
     <ClCompile Include="Source\Walsh.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ReadWriteTxt\ReadWriteTXT.cpp">
+      <Filter>Source\ReadWriteTxt</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ReadWriteTxt\ConvertToSlipp.cpp">
+      <Filter>Source\ReadWriteTxt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Slippage.h">
@@ -34,6 +43,12 @@
     </ClInclude>
     <ClInclude Include="Source\Walsh.h">
       <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ReadWriteTxt\ReadWriteTXT.h">
+      <Filter>Source\ReadWriteTxt</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ReadWriteTxt\ConvertToSlipp.h">
+      <Filter>Source\ReadWriteTxt</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
