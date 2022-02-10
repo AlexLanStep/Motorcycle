@@ -39,5 +39,6 @@ double Slippage::calc(std::map<std::string, double>* d, double rotv)
     // EMA1 - получаем фильтр 2-го порядка
     _ema_old_2 = _alfa_2 * _ema_old + _alfa_1_2 * _ema_old_2;
     return _ema_old_2 *rotv;
+
 }
 

@@ -12,8 +12,8 @@
 
 typedef  shared_ptr<vector<tuple<double, double, double, double, double, 
 																double, double, double, double, double,
-																double, double, double, double, double
-		>>> VecDouble;
+																double, double, double, double, double, 
+																double, double>>> VecDouble;
 
 namespace my_read_write
 {

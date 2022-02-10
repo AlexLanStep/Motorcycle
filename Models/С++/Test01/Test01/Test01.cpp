@@ -14,13 +14,13 @@ int main()
 
     // коэф. нормировки     
     std::map<std::string, double> _k_norm = map<string, double>(); 
-    _k_norm["yaw_acc"] = 380.0;
-    _k_norm["yaw_vel"] = 400.0;
-    _k_norm["roll_vel"] = 400.0;
+    _k_norm["yaw_acc"] = 300.0; // 300.0  380.0;
+    _k_norm["yaw_vel"] = 8.0; // 6.0;
+//    _k_norm["roll_vel"] = 8.0; //6.0;
 
     // файл для теста
     // std::string _path = "E:\\Motorcycle\\Data\\Basa\\T5_2021-10-08_10-44.csv";
-    std::string _path = "E:\\Motorcycle\\Data\\Basa\\T4_2021-10-08_10-36.csv";
+    std::string _path = "E:\\Motorcycle\\Data\\Basa\\T4_2021-10-08_10-36_c++.csv";
 
     std::shared_ptr<my_read_write::ConvertToSlipp> _read_convert;
     _read_convert = std::make_shared<my_read_write::ConvertToSlipp>();
@@ -38,13 +38,14 @@ int main()
     for (size_t i = 0; i < _dan->size(); i++)
     {
         auto x = _dan->at(i);
-        _k_norm["yaw_acc"] = std::get<11>(x);
-        _k_norm["yaw_vel"] = std::get<12>(x);
-        _k_norm["roll_vel"] = std::get<5>(x);
+        _k_norm["yaw_acc"] = std::get<13>(x);
+        _k_norm["yaw_vel"] = std::get<14>(x);
+//        _k_norm["roll_vel"] = std::get<5>(x);
         // передаем данные            
-        auto _x = _slip.calc(&_k_norm, std::get<14>(x));
+        auto _x = _slip.calc(&_k_norm, std::get<16>(x));
         // пишем значения в вестор
-        _test_dan->push_back(my_read_write::SReadDan(std::get<14>(x), _x));
+        _test_dan->push_back(my_read_write::SReadDan(std::get<16>(x), _x));
+
     }
 
     // сохраняем данные на диск для построения графика.
@@ -59,22 +60,23 @@ int main()
     //_read_write = std::make_shared<my_read_write::ReadWriteTXT>(_path, ";");
     //auto _z = _read_write->ReadDan(_path, ';');
 
- 
             double d0 = stod(iter->at(0));			//0 - Speed;
             double d1 = stod(iter->at(1));			//1 - Fr1.x;
             double d2 = stod(iter->at(2));			//2 - Fr1.y;
             double d3 = stod(iter->at(3));			//3 - Fr1.z;
             double d4 = stod(iter->at(4));			//4 - PitchVel;
             double d5 = stod(iter->at(5));			//5 - RollVel;
-            double d6 = stod(iter->at(7));			//7 - TF.vBelt;
-            double d7 = stod(iter->at(8));			//8 - TR.Frc.x;
-            double d8 = stod(iter->at(9));			//9 - TR.Frc.y;
-            double d9 = stod(iter->at(10));		  //10- TR.Frc.z;
-            double d10 = stod(iter->at(12));		//12- TR.vBelt;
-            double d11 = stod(iter->at(13));		//13- YawAcc;
-            double d12 = stod(iter->at(14));		//14- YawVel;
-            double d13 = stod(iter->at(15));		//15 - Engine.Trq;
-            double d14 = stod(iter->at(16));		//16- Engine.rotv;
+            double d6 = stod(iter->at(6));			//TF.muRoad
+            double d7 = stod(iter->at(7));			//7 - TF.vBelt;
+            double d8 = stod(iter->at(8));			//8 - TR.Frc.x;
+            double d9 = stod(iter->at(9));			//9 - TR.Frc.y;
+            double d10 = stod(iter->at(10));	  //10- TR.Frc.z;
+            double d11 = stod(iter->at(11));	  //11-  TR.muRoad;
+            double d12 = stod(iter->at(12));		//12- TR.vBelt;
+            double d13 = stod(iter->at(13));		//13- YawAcc;
+            double d14 = stod(iter->at(14));		//14- YawVel;
+            double d15 = stod(iter->at(15));		//15 - Engine.Trq;
+            double d16 = stod(iter->at(16));		//16- Engine.rotv;
 
 
 */
