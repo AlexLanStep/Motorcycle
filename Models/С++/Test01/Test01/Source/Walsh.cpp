@@ -7,11 +7,11 @@ Walsh::Walsh()
         _m[i] = 0.0;
 }
 
-double Walsh::calc(double d)
+float Walsh::calc(float d)
 {
-    double _w[NPOINT];                          // массив с гармониками
+    float _w[NPOINT];                          // массив с гармониками
     for (int i = 0; i < NPOINT; i++)
-        _w[i] = 0.0;
+        _w[i] = 0.0f;
 
     for (int i = NPOINT - 2; i >= 0; i--)       // сохраняем данные в начеле массива
         _m[i+1] = _m[i];                      // сдвигаем данные на один индекс
@@ -28,7 +28,7 @@ double Walsh::calc(double d)
             _w[i] += _k > 0 ? _m[j] : - _m[j];  // собираем данные для гармоник
         }
 
-    double _sum = 0.0;
+    float _sum = 0.0f;
 
     for (int i = 1; i < NPOINT; i++)            // считаем гармоники: вещественную и мнимую часть в квад 
         _w[i] = _w[i] * _w[i];
