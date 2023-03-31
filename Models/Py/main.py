@@ -37,20 +37,20 @@ if __name__ == '__main__':
     pp = pprint.PrettyPrinter(indent=4)
     pp.pprint(_files64)
 
-#    _set128 = SetParamsStart(_server.GetWorks(WorkingWay.Work128))
-#    (_files128, _path128) = _set128.Run()
-#    pp = pprint.PrettyPrinter(indent=4)
-#    pp.pprint(_files128)
+    _set128 = SetParamsStart(_server.GetWorks(WorkingWay.Work128))
+    (_files128, _path128) = _set128.Run()
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(_files128)
 
     _NumFiles = 4
 
-    _analys64 = Analysis(_server.GetWorks(WorkingWay.Work64), _files64[_NumFiles], 64)
-    _analys64.SignalPlotDan(["eSpYawAcc","eSpfYawAcc", "eSpfYawVel", "eSpfRollVel", "Slip"])
-    rez =  _analys64.NormDanAndFind()
-#    _analys128 = Analysis(_server.GetWorks(WorkingWay.Work128), _files128[_NumFiles], 128)
-#    _analys128.SignalPlotDan(["eSpYawAcc","eSpfYawAcc", "eSpfYawVel", "eSpfRollVel", "Slip"])
+    # _analys64 = Analysis(_server.GetWorks(WorkingWay.Work64), _files64[_NumFiles], 64)
+    # _analys64.SignalPlotDan(["eSpYawAcc","eSpfYawAcc", "eSpfYawVel", "eSpfRollVel", "Slip"])
+    # rez =  _analys64.NormDanAndFind()
+    _analys128 = Analysis(_server.GetWorks(WorkingWay.Work128), _files128[_NumFiles], 128)
+    _analys128.SignalPlotDan(["eSpYawAcc","eSpfYawAcc", "eSpfYawVel", "eSpfRollVel", "Slip"])
 
-    _analys64.TestSigmoid()  #
+    # _analys64.TestSigmoid()  #
 
     Show()
 

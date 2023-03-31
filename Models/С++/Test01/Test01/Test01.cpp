@@ -13,9 +13,9 @@ int main()
     setlocale(LC_ALL, "Russian");
 
     // коэф. нормировки     
-    std::map<std::string, double> _k_norm = map<string, double>(); 
-    _k_norm["yaw_acc"] = 300.0; // 300.0  380.0;
-    _k_norm["yaw_vel"] = 8.0; // 6.0;
+    std::map<std::string, float> _k_norm = map<string, float>(); 
+    _k_norm["yaw_acc"] = 300.0f; // 300.0  380.0;
+    _k_norm["yaw_vel"] = 8.0f; // 6.0;
 //    _k_norm["roll_vel"] = 8.0; //6.0;
 
     // файл для теста
@@ -38,11 +38,11 @@ int main()
     for (size_t i = 0; i < _dan->size(); i++)
     {
         auto x = _dan->at(i);
-        _k_norm["yaw_acc"] = std::get<13>(x);
-        _k_norm["yaw_vel"] = std::get<14>(x);
+        _k_norm["yaw_acc"] = (float) std::get<13>(x);
+        _k_norm["yaw_vel"] = (float)std::get<14>(x);
 //        _k_norm["roll_vel"] = std::get<5>(x);
         // передаем данные            
-        auto _x = _slip.calc(&_k_norm, std::get<16>(x));
+        auto _x = _slip.calc(&_k_norm, (float) std::get<16>(x));
         // пишем значения в вестор
         _test_dan->push_back(my_read_write::SReadDan(std::get<16>(x), _x));
 
